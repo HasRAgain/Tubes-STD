@@ -42,6 +42,7 @@ struct Playlist{
     adrPlaylist prev;
     adrPlaylistToLagu relasiToLagu;
     adrPlaylistToAkun relastiToAkun;
+    adrLagu lagu;
 };
 struct listPlaylist{
     adrPlaylist first;
@@ -113,6 +114,18 @@ void deleteLastPlaylistToLagu(listPlaylistToLagu &lpl, adrPlaylistToLagu &LPL);
 void deleteFirstPlaylistToAkun(listPlaylistToAkun &lpa, adrPlaylistToAkun &LPA);
 void deleteAfterPlaylistToAkun(listPlaylistToAkun &lpa,adrPlaylistToAkun prec, adrPlaylistToAkun &LPA);
 void deleteLastPlalistToAkun(listPlaylistToAkun &lpa, adrPlaylistToAkun &LPA);
+
+void showAkun(listAkun LA);
+void showLagu(listLagu LL);
+void showPlaylist(listPlaylist LP);
+
+void updateLagu(listLagu &LL, string id, string judul, string artis, string genre, int durasi);
+void updatePlaylist(listPlaylist &LP, string id, string namaPlaylist);
+
+void addLaguToPlaylist(listPlaylist &LP, adrLagu L);
+void removeLaguToPlaylist(listPlaylist &LP, string judul);
+void removeLaguToAllPlaylist(listAkun &LA, string judul);
+
 
 
 #endif // PEMUTARMUSIK_H_INCLUDED
