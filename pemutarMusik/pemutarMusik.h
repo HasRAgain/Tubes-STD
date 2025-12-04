@@ -85,9 +85,9 @@ bool isEmptyAkun(listAkun LA);
 bool isEmptyLagu(listLagu LL);
 // relasi
 adrPlaylistToLagu createRelasiPlaylistToLagu(adrPlaylist p, adrLagu l);
-void createListPlaylistToLagu(listPlaylistToLagu lpl);
+void createListPlaylistToLagu(listPlaylistToLagu &lpl);
 adrPlaylistToAkun createRelasiPlaylistToAkun(adrPlaylist p, adrAkun a);
-void createListPlaylistToAkun(listPlaylistToAkun lpa);
+void createListPlaylistToAkun(listPlaylistToAkun &lpa);
 // insert list
 void insertAkun(listAkun &LA, adrAkun A);
 void insertPlaylist(listPlaylist &LP, adrPlaylist P);

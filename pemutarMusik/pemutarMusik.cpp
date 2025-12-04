@@ -84,4 +84,61 @@ FS: mengembalikan TRUE jika list lagu kosong
 */
     return LL.first == nullptr && LL.last == nullptr;
 }
+adrPlaylistToLagu createRelasiPlaylistToLagu(adrPlaylist p, adrLagu l){
+    adrPlaylistToLagu ptl = new PlaylistToLagu;
 
+    ptl->playlist = p;
+    ptl->lagu = l;
+    ptl->next = nullptr;
+    ptl->prev = nullptr;
+
+    return ptl;
+};
+void createListPlaylistToLagu(listPlaylistToLagu &lpl){
+    lpl.first = nullptr;
+    lpl.last = nullptr;
+};
+adrPlaylistToAkun createRelasiPlaylistToAkun(adrPlaylist p, adrAkun a){
+    adrPlaylistToAkun pta = new PlaylistToAkun;
+
+    pta->playlist = p;
+    pta->akun = a;
+    pta->next = nullptr;
+    pta->prev = nullptr;
+
+    return pta;
+};
+void createListPlaylistToAkun(listPlaylistToAkun &lpa){
+    lpa.first = nullptr;
+    lpa.last = nullptr;
+};
+void insertAkun(listAkun &LA, adrAkun A){
+    if (isEmptyAkun(LA)){
+        LA.first = A;
+        LA.last = A;
+    }else {
+        LA.last->next = A;
+        A->prev = LA.last;
+        LA.last = A;
+    }
+};
+void insertPlaylist(listPlaylist &LP, adrPlaylist P){
+    if (isEmptyPlaylist(LP)){
+        LP.first = P;
+        LP.last = P;
+    }else {
+        LP.last->next = P;
+        P->prev = LP.last;
+        LP.last = P;
+    }
+};
+void insertLagu(listLagu &LL, adrLagu L){
+    if (isEmptyLagu(LL)){
+        LL.first = L;
+        LL.last = L;
+    }else {
+        LL.last->next = L;
+        LL->prev = LL.last;
+        LL.last = L;
+    }
+};
