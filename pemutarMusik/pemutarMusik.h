@@ -23,7 +23,7 @@ struct ListLagu {
 };
 
 struct LaguPlaylist {
-    Lagu* ref; // pointer ke node Lagu di library
+    Lagu* ref;
     LaguPlaylist* next;
 };
 
@@ -33,6 +33,23 @@ struct Playlist {
     LaguPlaylist* firstLagu;
     Playlist* next;
 };
+
+struct Akun {
+    string username;
+    string password;
+    string role;
+
+    Playlist* firstPlaylist;
+
+    Akun* next;
+    Akun* prev;
+};
+
+struct ListAkun {
+    Akun* first;
+    Akun* last;
+};
+
 
 
 
