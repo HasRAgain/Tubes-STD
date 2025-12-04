@@ -90,7 +90,7 @@ void insertPlaylist(listPlaylist &LP, adrPlaylist P);
 void insertLagu(listLagu &LL, adrLagu L);
 
 void deleteFirstAkun(listAkun &LA, adrAkun &A);
-void deleteAfterAkun((listAkun &LA,adrAkun prec, adrAkun &A);)
+void deleteAfterAkun(listAkun &LA,adrAkun prec, adrAkun &A);
 void deleteLastAkun(listAkun &LA, adrAkun &A);
 void deleteFirstLagu(listLagu &LL, adrLagu &L);
 void deleteAfterLagu(listLagu &LL,adrLagu prec, adrLagu &L);
@@ -103,5 +103,16 @@ adrAkun findAkun(listAkun A, string username);
 adrlagu findLaguByID(listLagu L, string id);
 adrLagu findLaguByJudul(listLagu L, string judul);
 adrPlaylist findPlaylist(listPlaylist P, string namaPlaylist);
+
+void insertPlaylistToLagu(listPlaylistToLagu &lpl, adrLagu L, adrPlaylist P);
+void insertPlaylistToAkun(listPlaylistToAkun &lpa, adrAkun a, adrPlaylist p);
+
+void deleteFirstPlaylistToLagu(listPlaylistToLagu &lpl, adrPlaylistToLagu &LPL);
+void deleteAfterPlaylistToLagu(listPlaylistToLagu &lpl,adrPlaylistToLagu prec, adrPlaylistToLagu &LPL);
+void deleteLastPlaylistToLagu(listPlaylistToLagu &lpl, adrPlaylistToLagu &LPL);
+void deleteFirstPlaylistToAkun(listPlaylistToAkun &lpa, adrPlaylistToAkun &LPA);
+void deleteAfterPlaylistToAkun(listPlaylistToAkun &lpa,adrPlaylistToAkun prec, adrPlaylistToAkun &LPA);
+void deleteLastPlalistToAkun(listPlaylistToAkun &lpa, adrPlaylistToAkun &LPA);
+
 
 #endif // PEMUTARMUSIK_H_INCLUDED
