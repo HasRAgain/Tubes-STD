@@ -70,4 +70,15 @@ struct listAkun{
     adrAkun last;
 };
 
+
+adrAkun createakun(string username, string password, string role);
+void createListAkun(listAkun &La);
+adrLagu createLagu(string idLagu, string judul, string artis, string genre, int durasi);
+void createListLagu(listLagu &Ll);
+adrPlaylistToLagu createRelasiPlaylistToLagu(adrPlaylist p, adrLagu l);
+void createListPlaylistToLagu(listPlaylistToLagu lpl);
+adrPlaylistToAkun createRelasiPlaylistToAkun(adrPlaylist p, adrAkun a);
+void createListPlaylistToAkun(listPlaylistToAkun lpa);
+
+
 #endif // PEMUTARMUSIK_H_INCLUDED
