@@ -49,6 +49,15 @@ struct ListAkun {
     Akun* first;
     Akun* last;
 };
+struct NodeQueue {
+    Lagu* ref;
+    NodeQueue* next;
+};
+
+struct Queue {
+    NodeQueue* front;
+    NodeQueue* rear;
+};
 
 
 
