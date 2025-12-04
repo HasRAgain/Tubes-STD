@@ -142,3 +142,135 @@ void insertLagu(listLagu &LL, adrLagu L){
         LL.last = L;
     }
 };
+
+void deleteFirstAkun(listAkun &LA, adrAkun &A){
+    if(isEmptyAkun(LA)){
+        cout << "tidak ada akun" endl;
+    }else if(LA.first == LA.last){
+        A = LA.first;
+        LA.first = nullptr;
+        LA.last = nullptr;
+    }else{
+        A = LA.first;
+        LA.first = A->next;
+        A->prev = nullptr;
+        A->next = nullptr;
+    }
+
+};
+void deleteAfterAkun(listAkun &LA,adrAkun prec, adrAkun &A){
+    if(isEmptyAkun(LA)){
+        cout << "tidak ada akun" endl;
+    }else if(LA.first == LA.last){
+        A = LA.first;
+        LA.first = nullptr;
+        LA.last = nullptr;
+    }else{
+        A = prec->next;
+        prec->next = A->next;
+        (A->next)->prev = prec;
+        A->next = nullptr;
+        A->prev = nullptr;
+    }
+};
+void deleteLastAkun(listAkun &LA, adrAkun &A){
+    if(isEmptyAkun(LA)){
+        cout << "tidak ada akun" endl;
+    }else if(LA.first == LA.last){
+        A = LA.first;
+        LA.first = nullptr;
+        LA.last = nullptr;
+    }else{
+        A = LA.last;
+        LA.last = A->prev;
+        LA.last->next = nullptr;
+        A->prev = nullptr;
+    }
+};
+void deleteFirstLagu(listLagu &LL, adrLagu &L){
+    if(isEmptyLagu(LL)){
+        cout << "tidak ada lagu" endl;
+    }else if(LL.first == LL.last){
+        L = LL.first;
+        LL.first = nullptr;
+        LL.last = nullptr;
+    }else{
+        L = LL.first;
+        LL.first = L->next;
+        L->prev = nullptr;
+        L->next = nullptr;
+    }
+
+};
+void deleteAfterLagu(listLagu &LL,adrLagu prec, adrLagu &L){
+    if(isEmptyLagu(LL)){
+        cout << "tidak ada lagu" endl;
+    }else if(LL.first == LL.last){
+        L = LL.first;
+        LL.first = nullptr;
+        LL.last = nullptr;
+    }else{
+        L = prec->next;
+        prec->next = L->next;
+        (L->next)->prev = prec;
+        L->next = nullptr;
+        L->prev = nullptr;
+    }
+};
+void deleteLastLagu(listLagu &LL, adrLagu &L){
+    if(isEmptyLagu(LL)){
+        cout << "tidak ada lagu" endl;
+    }else if(LL.first == LL.last){
+        L = LL.first;
+        LL.first = nullptr;
+        LL.last = nullptr;
+    }else{
+        L = LL.last;
+        L.last = L->prev;
+        LL.last->next = nullptr;
+        L->prev = nullptr;
+    }
+};
+void deleteFirstPlaylist(listPlaylist &LP, adrPlaylist &P){
+    if(isEmptyPlaylist(LP)){
+        cout << "tidak ada Playlist" endl;
+    }else if(LP.first == LP.last){
+        P = LP.first;
+        LP.first = nullptr;
+        LP.last = nullptr;
+    }else{
+        P = LP.first;
+        LP.first = P->next;
+        P->prev = nullptr;
+        P->next = nullptr;
+    }
+};
+void deleteAfterPlaylist(listPlaylist &LP,adrPlaylist prec, adrPlaylist &P){
+    if(isEmptyPlaylist(LP)){
+        cout << "tidak ada Playlist" endl;
+    }else if(LP.first == LP.last){
+        P = LP.first;
+        LP.first = nullptr;
+        LP.last = nullptr;
+    }else{
+        P = prec->next;
+        prec->next = P->next;
+        (P>next)->prev = prec;
+        P->next = nullptr;
+        P->prev = nullptr;
+    }
+};
+void deleteLastPlaylist(listPlaylist &LP, adrPlaylist &P){
+    if(isEmptyPlaylist(LP)){
+        cout << "tidak ada Playlist" endl;
+    }else if(LP.first == LP.last){
+        P = LP.first;
+        LP.first = nullptr;
+        LP.last = nullptr;
+    }else{
+        P = LA.last;
+        LP.last = P->prev;
+        LP.last->next = nullptr;
+        P->prev = nullptr;
+    }
+};
