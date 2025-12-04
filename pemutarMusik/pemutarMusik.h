@@ -5,6 +5,10 @@
 using namespace std;
 
 typedef struct Lagu *adrLagu;
+typedef struct Akun *adrAkun;
+typedef struct Playlist *adrPlaylist;
+typedef struct PlaylistToLagu *adrPlaylistToLagu;
+typedef struct PlaylistToAkun *adrPlaylistToAkun;
 
 struct Lagu{
     string idLagu;
@@ -16,50 +20,54 @@ struct Lagu{
     adrLagu next;
     adrLagu prev;
 };
-
-struct ListLagu {
-    Lagu* first;
-    Lagu* last;
+struct listLagu{
+    adrLagu first;
+    adrLagu last;
 };
-
-struct LaguPlaylist {
-    Lagu* ref;
-    LaguPlaylist* next;
+struct PlaylistToLagu{
+    adrLagu lagu;
+    adrPlaylist playlist;
+    adrLaguToPlaylist next;
+    adrLaguToPlaylist prev;
 };
-
-struct Playlist {
-    int id;
-    string nama;
-    LaguPlaylist* firstLagu;
-    Playlist* next;
+struct listPlaylistToLagu{
+    adrPlaylistToLagu first;
+    adrPlaylistToLagu last;
 };
+struct Playlist{
+    string namaPlaylist;
+    string idPlaylist;
 
-struct Akun {
+    adrPlaylist next;
+    adrPlaylist prev;
+    adrPlaylistToLagu relasiToLagu;
+    adrPlaylistToAkun relastiToAkun;
+};
+struct listPlaylist{
+    adrPlaylist first;
+    adrPlaylist last;
+};
+struct PlaylistToAkun{
+    adrPlaylist playlist;
+    adrAkun akun;
+    adrPlaylistToAkun next;
+    adrPlaylistToAkun prev;
+};
+struct listPlaylistToAkun{
+    adrPlaylistToAkun first;
+    adrPlaylistToAkun last;
+};
+struct Akun{
     string username;
-    string password;
+    string passwrod;
     string role;
 
-    Playlist* firstPlaylist;
-
-    Akun* next;
-    Akun* prev;
+    adrAkun next;
+    adrAkun prev;
 };
-
-struct ListAkun {
-    Akun* first;
-    Akun* last;
+struct listAkun{
+    adrAkun first;
+    adrAkun last;
 };
-struct NodeQueue {
-    Lagu* ref;
-    NodeQueue* next;
-};
-
-struct Queue {
-    NodeQueue* front;
-    NodeQueue* rear;
-};
-
-
-
 
 #endif // PEMUTARMUSIK_H_INCLUDED
