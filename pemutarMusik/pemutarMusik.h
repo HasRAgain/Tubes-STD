@@ -17,4 +17,23 @@ struct Lagu{
     adrLagu prev;
 };
 
+struct ListLagu {
+    Lagu* first;
+    Lagu* last;
+};
+
+struct LaguPlaylist {
+    Lagu* ref; // pointer ke node Lagu di library
+    LaguPlaylist* next;
+};
+
+struct Playlist {
+    int id;
+    string nama;
+    LaguPlaylist* firstLagu;
+    Playlist* next;
+};
+
+
+
 #endif // PEMUTARMUSIK_H_INCLUDED
