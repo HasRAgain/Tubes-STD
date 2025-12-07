@@ -318,12 +318,23 @@ adrPlaylistToLagu createRelasiPlaylistToLagu(adrPlaylist P, adrLagu L){
 
     return ptl;
 };
-void createListPlaylistToLagu(listPlaylistToLagu &LPL){
+void createListPlaylistTosLagu(listPlaylistToLagu &LPL){
     lpl.first = nullptr;
     lpl.last = nullptr;
 };
-bool isEmptyPlaylistToLagu(listPlaylistToLagu LPL);
-void insertPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
+bool isEmptyPlaylistToLagu(listPlaylistToLagu LPL){
+    return LPL.first == nullptr && LPL.last == nullptr;
+}
+void insertPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL){
+    if(isEmptyPlaylistToLagu(LPL)){
+        LPL.first = PL;
+        LPL.last = PL;
+    }else{
+        LPL.last->next = PL;
+        PL->prev = LPL.last;
+        LPL.last = PL;
+    }
+}
 void deleteFirstPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
 void deleteLastPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
 void deleteAfterPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu prec, adrPlaylistToLagu PL);
