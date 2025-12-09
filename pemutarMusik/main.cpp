@@ -1,9 +1,11 @@
-#include <iostream>
-
-using namespace std;
+#include "pemutarMusik.h"
 
 int main()
 {
-    cout << "Hello world!" << endl;
+    listAkun LA;
+    listPlaylist LP;
+    listLagu LL;
+
+    displayUtama(LA, LP, LL);
     return 0;
 }

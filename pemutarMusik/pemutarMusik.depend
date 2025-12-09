@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1765267540 source:d:\programming\strukdat\tubes-std\pemutarmusik\main.cpp
+	"pemutarMusik.h"
+
+1765267598 d:\programming\strukdat\tubes-std\pemutarmusik\pemutarmusik.h
+	<iostream>
+
