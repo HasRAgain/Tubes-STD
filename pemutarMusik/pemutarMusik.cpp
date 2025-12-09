@@ -589,15 +589,104 @@ void createListPlaylistToAkun(listPlaylistToAkun &LPA){
     LPA.first = nullptr;
     LPA.last = nullptr;
 };
-bool isEmptyPlaylistToAkun(listPlaylistToAkun LPA);
-void insertPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun PA);
-void deleteFirstPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun &PA);
-void deleteAfterPlaylistToAkun(listPlaylistToAkun &LPA,adrPlaylistToAkun prec, adrPlaylistToAkun &PA);
-void deleteLastPlalistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun &PA);
-adrPlaylistToLagu findPlaylistAkun(listPlaylistToAkun LPA, adrPlaylist P, adrAkun A);
-adrPlaylistToLagu findPlaylistAkun(listPlaylistToAkun LPA, string idPlaylist, string username);
-void connectPlaylistToAkun(listPlaylistToAkun &LPA, listPlaylist LP, listAkun LA, string idPlaylist, string username);
-void disconnectPlaylistToAkun(listPlaylistToAkun &LPA, string idPlaylist, string username);
+bool isEmptyPlaylistToAkun(listPlaylistToAkun LPA){
+    return LPA.first == nullptr && LPA.last == nullptr;
+};
+void insertPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun PA){
+    if(isEmptyPlaylistToAkun(LPA)){
+        LPA.first = PA;
+        LPA.last = PA;
+    }else{
+        LPA.last->next = PA;
+        PA->prev = LPA.last;
+        LPA.last = PA;
+    }
+};
+void deleteFirstPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun &PA){
+     if(LPA.first == LPA.last){
+        PA = LPA.first;
+        LPA.first = nullptr;
+        LPA.last = nullptr;
+        delete PA;
+    }else if(LPA.first->next != nullptr){
+        PA = LPA.first;
+        LPA.first = PA->next;
+        PA->next = nullptr;
+        LPA.first->prev = nullptr;
+        delete PA;
+    }
+
+};
+void deleteAfterPlaylistToAkun(listPlaylistToAkun &LPA,adrPlaylistToAkun prec, adrPlaylistToAkun &PA){
+    PA = prec->next;
+    prec->next = PA->next;
+    (PA->next)->prev = prec;
+    PA->next = nullptr;
+    PA->prev = nullptr;
+    delete PA;
+};
+void deleteLastPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun &PA){
+    if(LPA.first == LPA.last){
+        PA = LPA.last;
+        LPA.first = nullptr;
+        LPA.last = nullptr;
+        delete PA;
+    }else if(LPA.last->prev != nullptr){
+        PA = LPA.last;
+        LPA.last = PA->prev;
+        PA->prev = nullptr;
+        LPA.first->next = nullptr;
+        delete PA;
+    }
+};
+adrPlaylistToAkun findPlaylistAkun(listPlaylistToAkun LPA, adrPlaylist P, adrAkun A){
+    adrPlaylistToAkun PA = LPA.first;
+
+    while (PA != nullptr){
+        if(PA->playlist == P && PA->akun == A){
+            return PA;
+        }
+        PA = PA->next;
+    }
+    return nullptr;
+
+};
+adrPlaylistToAkun findPlaylistAkun(listPlaylistToAkun LPA, string username){
+     adrPlaylistToAkun PA = LPA.first;
+
+    while (PA != nullptr){
+        if(PA->akun->username == username){
+            return PA;
+        }
+        PA = PA->next;
+    }
+    return nullptr;
+
+};
+void connectPlaylistToAkun(listPlaylistToAkun &LPA, listPlaylist LP, listAkun LA, string idPlaylist, string username){
+    adrPlaylist p = findPlaylist(LP, idPlaylist);
+    adrAkun A = findAkun(LA, username);
+
+    if(p != nullptr && A != nullptr){
+        adrPlaylistToAkun pa = createRelasiPlaylistToAkun(p, A);
+        insertPlaylistToAkun(LPA, pa);
+    }
+
+};
+void disconnectPlaylistToAkun(listPlaylistToAkun &LPA, string idPlaylist, string username){
+     adrPlaylistToAkun pa = findPlaylistAkun(LPA, username);
+
+    if(pa != nullptr){
+        if(pa == LPA.first){
+            deleteFirstPlaylistToAkun(LPA, pa);
+        }else if(pa == LPA.last){
+            deleteLastPlaylistToAkun(LPA, pa);
+        }else{
+            deleteAfterPlaylistToAkun(LPA, pa->prev, pa);
+        }
+    }
+
+};
 
 void displayUtama(listAkun &LA, listPlaylist &LP, listLagu &LL){
     string username, password, role, idLagu, judulLagu, artisLagu, genreLagu, idPlaylist, namaPlaylist;

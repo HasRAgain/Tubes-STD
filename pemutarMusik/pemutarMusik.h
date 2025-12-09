@@ -142,12 +142,12 @@ bool isEmptyPlaylistToAkun(listPlaylistToAkun LPA);
 void insertPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun PA);
 void deleteFirstPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun &PA);
 void deleteAfterPlaylistToAkun(listPlaylistToAkun &LPA,adrPlaylistToAkun prec, adrPlaylistToAkun &PA);
-void deleteLastPlalistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun &PA);
+void deleteLastPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun &PA);
 // mencari elemen playlist & akun
 // a. menggunakan address playlist & akun
-adrPlaylistToLagu findPlaylistAkun(listPlaylistToAkun LPA, adrPlaylist P, adrAkun A);
+adrPlaylistToAkun findPlaylistAkun(listPlaylistToAkun LPA, adrPlaylist P, adrAkun A);
 // b. menggunakan idPlaylist dan username akun
-adrPlaylistToLagu findPlaylistAkun(listPlaylistToAkun LPA, string idPlaylist, string username);
+adrPlaylistToAkun findPlaylistAkun(listPlaylistToAkun LPA, string username);
 /* Connect: menyambung list playlist dengan list akun
 Disconnect: memutus hubungan list playlist dengan list akun
 */
