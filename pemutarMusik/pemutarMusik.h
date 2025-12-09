@@ -8,10 +8,12 @@ using namespace std;
 typedef struct Lagu *adrLagu;
 typedef struct Akun *adrAkun;
 typedef struct Playlist *adrPlaylist;
+
 // address list relasi
 typedef struct PlaylistToLagu *adrPlaylistToLagu;
 typedef struct PlaylistToAkun *adrPlaylistToAkun;
 
+//ADT list lagu, playlist, akun
 struct Lagu{
     string idLagu;
     string judul;
@@ -26,39 +28,17 @@ struct listLagu{
     adrLagu first;
     adrLagu last;
 };
-struct PlaylistToLagu{
-    adrLagu lagu;
-    adrPlaylist playlist;
-    adrLaguToPlaylist next;
-    adrLaguToPlaylist prev;
-};
-struct listPlaylistToLagu{
-    adrPlaylistToLagu first;
-    adrPlaylistToLagu last;
-};
 struct Playlist{
     string namaPlaylist;
     string idPlaylist;
+    adrLagu laguInPlaylist;
 
     adrPlaylist next;
     adrPlaylist prev;
-    adrPlaylistToLagu relasiToLagu;
-    adrPlaylistToAkun relastiToAkun;
-    adrLagu lagu;
 };
 struct listPlaylist{
     adrPlaylist first;
     adrPlaylist last;
-};
-struct PlaylistToAkun{
-    adrPlaylist playlist;
-    adrAkun akun;
-    adrPlaylistToAkun next;
-    adrPlaylistToAkun prev;
-};
-struct listPlaylistToAkun{
-    adrPlaylistToAkun first;
-    adrPlaylistToAkun last;
 };
 struct Akun{
     string username;
@@ -73,63 +53,116 @@ struct listAkun{
     adrAkun last;
 };
 
+//ADT list relasi playlist to akun dan playlist to lagu
+struct PlaylistToLagu{
+    adrLagu lagu;
+    adrPlaylist playlist;
 
+    adrLaguToPlaylist next;
+    adrLaguToPlaylist prev;
+};
+struct listPlaylistToLagu{
+    adrPlaylistToLagu first;
+    adrPlaylistToLagu last;
+};
+struct PlaylistToAkun{
+    adrPlaylist playlist;
+    adrAkun akun;
+
+    adrPlaylistToAkun next;
+    adrPlaylistToAkun prev;
+};
+struct listPlaylistToAkun{
+    adrPlaylistToAkun first;
+    adrPlaylistToAkun last;
+};
+
+//Subprogram list Akun
 adrAkun createakun(string username, string password, string role);
 void createListAkun(listAkun &LA);
-adrLagu createLagu(string idLagu, string judul, string artis, string genre, int durasi);
-void createListLagu(listLagu &LL);
-adrPlaylist createPlaylist(string nama, string id);
-void createListPlaylist(listPlaylist &LP);
-bool isEmptyPlaylist(listPlaylist LP);
 bool isEmptyAkun(listAkun LA);
-bool isEmptyLagu(listLagu LL);
-// relasi
-adrPlaylistToLagu createRelasiPlaylistToLagu(adrPlaylist p, adrLagu l);
-void createListPlaylistToLagu(listPlaylistToLagu &lpl);
-adrPlaylistToAkun createRelasiPlaylistToAkun(adrPlaylist p, adrAkun a);
-void createListPlaylistToAkun(listPlaylistToAkun &lpa);
-// insert list
 void insertAkun(listAkun &LA, adrAkun A);
-void insertPlaylist(listPlaylist &LP, adrPlaylist P);
-void insertLagu(listLagu &LL, adrLagu L);
-// delete list
 void deleteFirstAkun(listAkun &LA, adrAkun &A);
 void deleteAfterAkun(listAkun &LA,adrAkun prec, adrAkun &A);
 void deleteLastAkun(listAkun &LA, adrAkun &A);
+adrAkun findAkun(listAkun A, string username);
+void showAkun(listAkun LA);
+void updateAkun(listAkun &LA, string username, string password);
+
+//subprogram list lagu
+adrLagu createLagu(string idLagu, string judul, string artis, string genre, int durasi);
+void createListLagu(listLagu &LL);
+bool isEmptyLagu(listLagu LL);
+void insertLagu(listLagu &LL, adrLagu L);
 void deleteFirstLagu(listLagu &LL, adrLagu &L);
 void deleteAfterLagu(listLagu &LL,adrLagu prec, adrLagu &L);
 void deleteLastLagu(listLagu &LL, adrLagu &L);
+adrlagu findLaguByID(listLagu L, string id);
+adrLagu findLaguByJudul(listLagu L, string judul);
+void showLagu(listLagu LL);
+void updateLagu(listLagu &LL, string id, string judul, string artis, string genre, int durasi);
+
+//subprogram list playlist
+adrPlaylist createPlaylist(string nama, string id);
+void createListPlaylist(listPlaylist &LP);
+bool isEmptyPlaylist(listPlaylist LP);
+void insertPlaylist(listPlaylist &LP, adrPlaylist P);
 void deleteFirstPlaylist(listPlaylist &LP, adrPlaylist &P);
 void deleteAfterPlaylist(listPlaylist &LP,adrPlaylist prec, adrPlaylist &P);
 void deleteLastPlaylist(listPlaylist &LP, adrPlaylist &P);
-// find list
-adrAkun findAkun(listAkun A, string username);
-adrlagu findLaguByID(listLagu L, string id);
-adrLagu findLaguByJudul(listLagu L, string judul);
 adrPlaylist findPlaylist(listPlaylist P, string namaPlaylist);
-//insert relasi
-void insertPlaylistToLagu(listPlaylistToLagu &lpl, adrLagu L, adrPlaylist P);
-void insertPlaylistToAkun(listPlaylistToAkun &lpa, adrAkun a, adrPlaylist p);
-//delete relasi
-void deleteFirstPlaylistToLagu(listPlaylistToLagu &lpl, adrPlaylistToLagu &LPL);
-void deleteAfterPlaylistToLagu(listPlaylistToLagu &lpl,adrPlaylistToLagu prec, adrPlaylistToLagu &LPL);
-void deleteLastPlaylistToLagu(listPlaylistToLagu &lpl, adrPlaylistToLagu &LPL);
-void deleteFirstPlaylistToAkun(listPlaylistToAkun &lpa, adrPlaylistToAkun &LPA);
-void deleteAfterPlaylistToAkun(listPlaylistToAkun &lpa,adrPlaylistToAkun prec, adrPlaylistToAkun &LPA);
-void deleteLastPlalistToAkun(listPlaylistToAkun &lpa, adrPlaylistToAkun &LPA);
-//show list
-void showAkun(listAkun LA);
-void showLagu(listLagu LL);
 void showPlaylist(listPlaylist LP);
-//update list
-void updateLagu(listLagu &LL, string id, string judul, string artis, string genre, int durasi);
-void updateAkun(listAkun &LA, string username, string password);
 void updatePlaylist(listPlaylist &LP, string id, string namaPlaylist);
+
+//subprogram list relasi PlaylistToLagu
+adrPlaylistToLagu createRelasiPlaylistToLagu(adrPlaylist P, adrLagu L);
+void createListPlaylistToLagu(listPlaylistToLagu &LPL);
+bool isEmptyPlaylistToLagu(listPlaylistToLagu LPL);
+void insertPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
+void deleteFirstPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
+void deleteLastPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
+void deleteAfterPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu prec, adrPlaylistToLagu PL);
+// mencari elemen playlist & lagu
+// a. menggunakan address playlist & lagu
+adrPlaylistToLagu findPlaylistLagu(listPlaylistToLagu LPL, adrPlaylist P, adrLagu L);
+// b. menggunakan idPlaylist dan judul lagu
+adrPlaylistToLagu findPlaylistLagu(listPlaylistToLagu LPL, string idPlaylist, string judulLagu);
+/* Connect: menyambung list playlist dengan list lagu
+Disconnect: memutus hubungan list playlist dengan list lagu
+*/
+void connectPlaylistToLagu(listPlaylistToLagu &LPL, listPlaylist LP, listLagu LL, string idPlaylist, string judulLagu);
+void disconnectPlaylistToLagu(listPlaylistToLagu &LPL, string idPlaylist, string judulLagu);
+// Menampilkan list relasi playlistToLagu terhadap playlist
+//void printPlaylistToLagu(listPlaylistToLagu LPL, listPlaylist LP)
+
+//subprogram list relasi playlistToAkun
+adrPlaylistToAkun createRelasiPlaylistToAkun(adrPlaylist P, adrAkun A);
+void createListPlaylistToAkun(listPlaylistToAkun &LPA);
+bool isEmptyPlaylistToAkun(listPlaylistToAkun LPA);
+void insertPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun PA);
+void deleteFirstPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun &PA);
+void deleteAfterPlaylistToAkun(listPlaylistToAkun &LPA,adrPlaylistToAkun prec, adrPlaylistToAkun &PA);
+void deleteLastPlalistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun &PA);
+// mencari elemen playlist & akun
+// a. menggunakan address playlist & akun
+adrPlaylistToLagu findPlaylistAkun(listPlaylistToAkun LPA, adrPlaylist P, adrAkun A);
+// b. menggunakan idPlaylist dan username akun
+adrPlaylistToLagu findPlaylistAkun(listPlaylistToAkun LPA, string idPlaylist, string username);
+/* Connect: menyambung list playlist dengan list akun
+Disconnect: memutus hubungan list playlist dengan list akun
+*/
+void connectPlaylistToAkun(listPlaylistToAkun &LPA, listPlaylist LP, listAkun LA, string idPlaylist, string username);
+void disconnectPlaylistToAkun(listPlaylistToAkun &LPA, string idPlaylist, string username);
+// Menampilkan list relasi playlistToLagu terhadap playlist
+//void printPlaylistToAkun(lsitPlaylistToAkun LPA, listPlaylist LP)
+
+
 //fitur
+/*
 void addLaguToPlaylist(listPlaylist &LP, adrLagu L);
 void removeLaguToPlaylist(listPlaylist &LP, string judul);
 void removeLaguToAllPlaylist(listAkun &LA, string judul);
-
+*/
 
 
 #endif // PEMUTARMUSIK_H_INCLUDED
