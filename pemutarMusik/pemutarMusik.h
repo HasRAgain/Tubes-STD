@@ -157,7 +157,9 @@ void disconnectPlaylistToAkun(listPlaylistToAkun &LPA, string idPlaylist, string
 //void printPlaylistToAkun(lsitPlaylistToAkun LPA, listPlaylist LP)
 
 void displayUtama(listAkun &LA, listPlaylist &LP, listLagu &LL);
-
+void menuUtama();
+void adminMenu();
+void userMenu();
 //fitur
 /*
 void addLaguToPlaylist(listPlaylist &LP, adrLagu L);

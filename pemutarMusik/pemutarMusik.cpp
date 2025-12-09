@@ -736,3 +736,58 @@ void displayUtama(listAkun &LA, listPlaylist &LP, listLagu &LL){
     }
     showPlaylist(LP);
 }
+void adminMenu() {
+    cout << "\n--- Admin Menu ---\n";
+    cout << "1. Tambah lagu\n";
+    cout << "2. Lihat semua lagu\n";
+    cout << "3. Edit lagu\n";
+    cout << "4. Hapus lagu\n";
+    cout << "5. Lihat semua akun\n";
+    cout << "6. Logout\n";
+}
+
+
+void userMenu() {
+    cout << "\n--- User Menu ---\n";
+    cout << "1. Lihat Library\n";
+    cout << "2. Cari lagu berdasarkan judul\n";
+    cout << "3. Play lagu dari library\n";
+    cout << "4. Kelola Playlist (buat/hapus/lihat/tambah/hapus lagu)\n";
+    cout << "5. Lihat playlist akun lain\n";
+    cout << "6. Logout\n";
+}
+
+void menuUtama(){
+    int pilihan;
+    cout << "Selamat Datang"<<endl;
+    cout << "1. Login :" << endl << "2. Register :"<<endl << "3. Exit :"<<endl;
+    cout << "Pilih 1/2/3 :";
+    cin >> pilihan;
+    cout<< endl;
+
+    if(pilihan == 1){
+        int x;
+        cout<< "1. Login as user :"<<endl<<"Login as admin :";
+        cout << "pilih 1/2 :";
+        cin >> x;
+        cout << endl;
+        if(x == 1){
+            userMenu();
+        }else if (x == 2){
+           adminMenu();
+        }
+    }else if(pilihan == 2){
+        string username, password, role;
+        cout << "username :";
+        cin >> username;
+        cout << "password :";
+        cin >> password;
+        cout << "role (User/Admin) :";
+        cin >> role;
+        adrAkun A = createakun(username, password, role);
+        listAkun LA;
+        insertAkun(LA, A);
+
+    }
+
+}
