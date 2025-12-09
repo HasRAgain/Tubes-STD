@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1765267540 source:d:\programming\strukdat\tubes-std\pemutarmusik\main.cpp
+1765290138 source:d:\programming\strukdat\tubes-std\pemutarmusik\main.cpp
 	"pemutarMusik.h"
 
-1765267598 d:\programming\strukdat\tubes-std\pemutarmusik\pemutarmusik.h
+1765293815 d:\programming\strukdat\tubes-std\pemutarmusik\pemutarmusik.h
 	<iostream>
 
 1765289638 source:c:\users\user\documents\github\tubes-std\pemutarmusik\main.cpp
@@ -16,4 +16,7 @@
 
 1765287352 d:\tugases\sem3\strukdat\tubes-std\pemutarmusik\pemutarmusik.h
 	<iostream>
+
+1765293859 source:d:\programming\strukdat\tubes-std\pemutarmusik\pemutarmusik.cpp
+	"pemutarMusik.h"
 
