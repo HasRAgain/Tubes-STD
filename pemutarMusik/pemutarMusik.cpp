@@ -191,9 +191,15 @@ FS: list akun dengan elemen lagu L berada di akhir list.
         LL.first = L;
         LL.last = L;
     }else {
-        LL.last->next = L;
-        L->prev = LL.last;
-        LL.last = L;
+        adrLagu id = findLaguByID(LL, L->idLagu);
+        if (id == nullptr){
+            LL.last->next = L;
+            L->prev = LL.last;
+            LL.last = L;
+        }else{
+            cout << "ID already exist";
+        }
+
     }
 }
 void deleteFirstLagu(listLagu &LL, adrLagu &L){
@@ -485,13 +491,88 @@ void insertPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL){
         LPL.last = PL;
     }
 }
-void deleteFirstPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
-void deleteLastPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
-void deleteAfterPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu prec, adrPlaylistToLagu PL);
-adrPlaylistToLagu findPlaylistLagu(listPlaylistToLagu LPL, adrPlaylist P, adrLagu L);
-adrPlaylistToLagu findPlaylistLagu(listPlaylistToLagu LPL, string idPlaylist, string judulLagu);
-void connectPlaylistToLagu(listPlaylistToLagu &LPL, listPlaylist LP, listLagu LL, string idPlaylist, string judulLagu);
-void disconnectPlaylistToLagu(listPlaylistToLagu &LPL, string idPlaylist, string judulLagu);
+void deleteFirstPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL){
+ if(LPL.first == LPL.last){
+        PL = LPL.first;
+        LPL.first = nullptr;
+        LPL.last = nullptr;
+        delete PL;
+    }else if(LPL.first->next != nullptr){
+        PL = LPL.first;
+        LPL.first = PL->next;
+        PL->next = nullptr;
+        LPL.first->prev = nullptr;
+        delete PL;
+    }
+};
+void deleteLastPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL){
+     if(LPL.first == LPL.last){
+        PL = LPL.last;
+        LPL.first = nullptr;
+        LPL.last = nullptr;
+        delete PL;
+    }else if(LPL.last->prev != nullptr){
+        PL = LPL.last;
+        LPL.last = PL->prev;
+        PL->prev = nullptr;
+        LPL.first->next = nullptr;
+        delete PL;
+    }
+};
+void deleteAfterPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu prec, adrPlaylistToLagu PL){
+      PL = prec->next;
+    prec->next = PL->next;
+    (PL->next)->prev = prec;
+    PL->next = nullptr;
+    PL->prev = nullptr;
+    delete PL;
+}
+adrPlaylistToLagu findPlaylistLagu(listPlaylistToLagu LPL, adrPlaylist P, adrLagu L){
+     adrPlaylistToLagu PL = LPL.first;
+
+    while (PL != nullptr){
+        if(PL->playlist == P && PL->lagu == L){
+            return PL;
+        }
+        PL = PL->next;
+    }
+    return nullptr;
+
+}
+adrPlaylistToLagu findPlaylistLagu(listPlaylistToLagu LPL, string idPlaylist, string judulLagu){
+     adrPlaylistToLagu PL = LPL.first;
+
+    while (PL != nullptr){
+        if(PL->playlist->idPlaylist == idPlaylist && PL->lagu->judul == judulLagu){
+            return PL;
+        }
+        PL = PL->next;
+    }
+    return nullptr;
+
+}
+void connectPlaylistToLagu(listPlaylistToLagu &LPL, listPlaylist LP, listLagu LL, string idPlaylist, string judulLagu){
+      adrPlaylist p = findPlaylist(LP, idPlaylist);
+    adrLagu l = findLaguByJudul(LL, judulLagu);
+    adrPlaylistToLagu pl;
+    if(p != nullptr && l != nullptr){
+        pl = createRelasiPlaylistToLagu(p, l);
+        insertPlaylistToLagu(LPL, pl);
+    }
+
+}
+void disconnectPlaylistToLagu(listPlaylistToLagu &LPL, string idPlaylist, string judulLagu){
+     adrPlaylistToLagu pl;
+     if(pl != nullptr){
+        if(pl == LPL.first){
+            deleteFirstPlaylistToLagu(LPL, pl);
+        }else if(pl == LPL.last){
+            deleteLastPlaylistToLagu(LPL, pl);
+        }else{
+            deleteAfterPlaylistToLagu(LPL, pl->prev, pl);
+        }
+    }
+}
 
 // LIST PLAYLIST TO AKUN
 adrPlaylistToAkun createRelasiPlaylistToAkun(adrPlaylist P, adrAkun A){
@@ -519,7 +600,7 @@ void connectPlaylistToAkun(listPlaylistToAkun &LPA, listPlaylist LP, listAkun LA
 void disconnectPlaylistToAkun(listPlaylistToAkun &LPA, string idPlaylist, string username);
 
 void displayUtama(listAkun &LA, listPlaylist &LP, listLagu &LL){
-    string username, password, role, idLagu, namaLagu, artisLagu, genreLagu, idPlaylist, namaPlaylist;
+    string username, password, role, idLagu, judulLagu, artisLagu, genreLagu, idPlaylist, namaPlaylist;
     int durasiLagu, i;
     adrAkun A;
     adrPlaylist P;
@@ -536,4 +617,33 @@ void displayUtama(listAkun &LA, listPlaylist &LP, listLagu &LL){
         insertAkun(LA, A);
     }
     showAkun(LA);
+
+    createListLagu(LL);
+    for (i = 0; i<3; i++){
+        cout << "ID Lagu: ";
+        cin >> idLagu;
+        cout << "Judul Lagu: ";
+        cin >> judulLagu;
+        cout << "Artis: ";
+        cin >> artisLagu;
+        cout << "genre : ";
+        cin >> genreLagu;
+        cout << "Durasi: ";
+        cin >> durasiLagu;
+
+        L = createLagu(idLagu, judulLagu, artisLagu, genreLagu, durasiLagu);
+        insertLagu(LL, L);
+    }
+    showLagu(LL);
+
+    createListAkun(LA);
+    for (i = 0; i<3; i++){
+        cout << "ID Playlist: ";
+        cin >> idPlaylist;
+        cout << "Nama Playlist: ";
+        cin >> namaPlaylist;
+        P = createPlaylist(idPlaylist, namaPlaylist);
+        insertPlaylist(LP, P);
+    }
+    showPlaylist(LP);
 }
