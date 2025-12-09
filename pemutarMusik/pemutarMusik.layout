@@ -2,9 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="main.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="25" topLine="0" />
 		</Cursor>
 	</File>
 <<<<<<< HEAD
@@ -19,13 +19,17 @@
 =======
 	<File name="pemutarMusik.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1525" topLine="71" />
+			<Cursor1 position="4614" topLine="133" />
 		</Cursor>
 	</File>
-	<File name="pemutarMusik.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="pemutarMusik.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
+<<<<<<< HEAD
 			<Cursor1 position="9666" topLine="316" />
 >>>>>>> bd57462da620e9dec0bea800e63f3519fe544ac3
+=======
+			<Cursor1 position="5538" topLine="188" />
+>>>>>>> 720716382078f63e10d13a43e83109d6ede6ee7a
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

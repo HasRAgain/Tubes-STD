@@ -58,8 +58,8 @@ struct PlaylistToLagu{
     adrLagu lagu;
     adrPlaylist playlist;
 
-    adrLaguToPlaylist next;
-    adrLaguToPlaylist prev;
+    adrPlaylistToLagu next;
+    adrPlaylistToLagu prev;
 };
 struct listPlaylistToLagu{
     adrPlaylistToLagu first;
@@ -85,9 +85,9 @@ void insertAkun(listAkun &LA, adrAkun A);
 void deleteFirstAkun(listAkun &LA, adrAkun &A);
 void deleteAfterAkun(listAkun &LA,adrAkun prec, adrAkun &A);
 void deleteLastAkun(listAkun &LA, adrAkun &A);
-adrAkun findAkun(listAkun A, string username);
+adrAkun findAkun(listAkun LA, string username);
 void showAkun(listAkun LA);
-void updateAkun(listAkun &LA, string username, string password);
+void updateAkun(listAkun &LA);
 
 //subprogram list lagu
 adrLagu createLagu(string idLagu, string judul, string artis, string genre, int durasi);
@@ -97,10 +97,10 @@ void insertLagu(listLagu &LL, adrLagu L);
 void deleteFirstLagu(listLagu &LL, adrLagu &L);
 void deleteAfterLagu(listLagu &LL,adrLagu prec, adrLagu &L);
 void deleteLastLagu(listLagu &LL, adrLagu &L);
-adrlagu findLaguByID(listLagu L, string id);
-adrLagu findLaguByJudul(listLagu L, string judul);
+adrLagu findLaguByID(listLagu LL, string id);
+adrLagu findLaguByJudul(listLagu LL, string judul);
 void showLagu(listLagu LL);
-void updateLagu(listLagu &LL, string id, string judul, string artis, string genre, int durasi);
+void updateLagu(listLagu &LL);
 
 //subprogram list playlist
 adrPlaylist createPlaylist(string nama, string id);
@@ -112,7 +112,7 @@ void deleteAfterPlaylist(listPlaylist &LP,adrPlaylist prec, adrPlaylist &P);
 void deleteLastPlaylist(listPlaylist &LP, adrPlaylist &P);
 adrPlaylist findPlaylist(listPlaylist P, string namaPlaylist);
 void showPlaylist(listPlaylist LP);
-void updatePlaylist(listPlaylist &LP, string id, string namaPlaylist);
+void updatePlaylist(listPlaylist &LP);
 
 //subprogram list relasi PlaylistToLagu
 adrPlaylistToLagu createRelasiPlaylistToLagu(adrPlaylist P, adrLagu L);
@@ -156,6 +156,7 @@ void disconnectPlaylistToAkun(listPlaylistToAkun &LPA, string idPlaylist, string
 // Menampilkan list relasi playlistToLagu terhadap playlist
 //void printPlaylistToAkun(lsitPlaylistToAkun LPA, listPlaylist LP)
 
+void displayUtama(listAkun &LA, listPlaylist &LP, listLagu &LL);
 
 //fitur
 /*

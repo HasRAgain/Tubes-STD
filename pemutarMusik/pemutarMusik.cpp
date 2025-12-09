@@ -9,7 +9,7 @@ FS: mengembalikan elemen akun (A) yang sudah terisi username, password, dan role
 
     A->username = username;
     A->password = password;
-    A->role = role
+    A->role = role;
     A->next = nullptr;
     A->prev = nullptr;
 
@@ -46,7 +46,7 @@ void deleteFirstAkun(listAkun &LA, adrAkun &A){
 FS: akun sudah terhapus dari list dan di simpan di dalam A.
 */
     if(isEmptyAkun(LA)){
-        cout << "tidak ada akun" endl;
+        cout << "tidak ada akun" << endl;
     }else if(LA.first == LA.last){
         A = LA.first;
         LA.first = nullptr;
@@ -63,7 +63,7 @@ void deleteAfterAkun(listAkun &LA,adrAkun prec, adrAkun &A){
 FS: akun sudah terhapus dari list dan di simpan di dalam A.
 */
     if(isEmptyAkun(LA)){
-        cout << "tidak ada akun yang terdaftar" endl;
+        cout << "tidak ada akun yang terdaftar" << endl;
     }else if(LA.first == LA.last){
         A = LA.first;
         LA.first = nullptr;
@@ -81,7 +81,7 @@ void deleteLastAkun(listAkun &LA, adrAkun &A){
 FS: akun sudah terhapus dari list dan di simpan di dalam A.
 */
     if(isEmptyAkun(LA)){
-        cout << "tidak ada akun yang terdaftar" endl;
+        cout << "tidak ada akun yang terdaftar" << endl;
     }else if(LA.first == LA.last){
         A = LA.first;
         LA.first = nullptr;
@@ -93,20 +93,64 @@ FS: akun sudah terhapus dari list dan di simpan di dalam A.
         A->prev = nullptr;
     }
 }
-adrAkun findAkun(listAkun A, string username){
+adrAkun findAkun(listAkun LA, string username){
 /*IS: terdefinisi list akun yang tidak kosong dan username akun yang ingin dicari
 FS: mengembalikan address akun sesuai username
 */
+    adrAkun A = LA.first;
+
+    while(A != nullptr){
+        if(A->username == username){
+            return A;
+        }
+        A = A->next;
+    }
+    return nullptr;
 }
 void showAkun(listAkun LA){
 /*IS: terdefinisi list akun yang tidak kosong
 FS: menampilkan list username akun yang terdaftar
 */
+    adrAkun A = LA.first;
+    cout << "--- AKUN YANG TERDAFTAR ---" << endl;
+    while (A != nullptr){
+        cout << "- " << A->username << "(" << A->role << ")" << endl;
+        A = A->next;
+    }
+    cout << endl;
 }
-void updateAkun(listAkun &LA, string username, string password){???
-/* IS: terdefinisi list akun yang tidak kosong dan username beserta password baru
-FS: list
+void updateAkun(listAkun &LA){
+/* IS: terdefinisi list akun yang tidak kosong
+FS: Akun sudah terisi dengan username dan password baru
+User akan memasukkan username sebelumnya, jika ditemukan, user dapat mengedit akunnya
 */
+    string usernameLama, usernameBaru, passwordBaru;
+    adrAkun statusAkun;
+    adrAkun A = LA.first;
+
+    cout << "--- UPDATE AKUN ---" << endl;
+    cout << "Masukkan username kamu: ";
+    cin >> usernameLama;
+    statusAkun = findAkun(LA, usernameLama);
+
+    while(A != nullptr){
+        if(A != statusAkun){
+            cout << "Akun tidak ditemukan!";
+            return;
+        }else{
+            cout << "=== Edit Akun ===" << endl;
+            cout << "Masukkan username baru: ";
+            cin >> usernameBaru;
+            cout << "Masukkan password baru: ";
+            cin >> passwordBaru;
+
+            A->username = usernameBaru;
+            A->password = passwordBaru;
+
+            cout << "Akun berhasil diubah" << endl << endl;
+        }
+        A = A->next;
+    }
 }
 
 //LIST LAGU
@@ -147,9 +191,15 @@ FS: list akun dengan elemen lagu L berada di akhir list.
         LL.first = L;
         LL.last = L;
     }else {
-        LL.last->next = L;
-        LL->prev = LL.last;
-        LL.last = L;
+        adrLagu id = findLaguByID(LL, L->idLagu);
+        if (id == nullptr){
+            LL.last->next = L;
+            L->prev = LL.last;
+            LL.last = L;
+        }else{
+            cout << "ID already exist";
+        }
+
     }
 }
 void deleteFirstLagu(listLagu &LL, adrLagu &L){
@@ -157,7 +207,7 @@ void deleteFirstLagu(listLagu &LL, adrLagu &L){
 FS: akun sudah terhapus dari list dan di simpan di dalam L.
 */
     if(isEmptyLagu(LL)){
-        cout << "tidak ada lagu yang terdaftar" endl;
+        cout << "tidak ada lagu yang terdaftar" << endl;
     }else if(LL.first == LL.last){
         L = LL.first;
         LL.first = nullptr;
@@ -174,7 +224,7 @@ void deleteAfterLagu(listLagu &LL,adrLagu prec, adrLagu &L){
 FS: akun sudah terhapus dari list dan di simpan di dalam L.
 */
     if(isEmptyLagu(LL)){
-        cout << "tidak ada lagu yang terdaftar" endl;
+        cout << "tidak ada lagu yang terdaftar" << endl;
     }else if(LL.first == LL.last){
         L = LL.first;
         LL.first = nullptr;
@@ -192,22 +242,87 @@ void deleteLastLagu(listLagu &LL, adrLagu &L){
 FS: akun sudah terhapus dari list dan di simpan di dalam L.
 */
     if(isEmptyLagu(LL)){
-        cout << "tidak ada lagu yang terdaftar" endl;
+        cout << "tidak ada lagu yang terdaftar" << endl;
     }else if(LL.first == LL.last){
         L = LL.first;
         LL.first = nullptr;
         LL.last = nullptr;
     }else{
         L = LL.last;
-        L.last = L->prev;
+        LL.last = L->prev;
         LL.last->next = nullptr;
         L->prev = nullptr;
     }
 };
-adrlagu findLaguByID(listLagu L, string id);
-adrLagu findLaguByJudul(listLagu L, string judul);
-void showLagu(listLagu LL);
-void updateLagu(listLagu &LL, string id, string judul, string artis, string genre, int durasi);
+adrLagu findLaguByID(listLagu LL, string id){
+    adrLagu L = LL.first;
+
+    while (L != nullptr){
+        if(L->idLagu == id){
+            return L;
+        }
+        L = L->next;
+    }
+    return nullptr;
+}
+adrLagu findLaguByJudul(listLagu LL, string judul){
+    adrLagu L = LL.first;
+
+    while (L != nullptr){
+        if(L->judul == judul){
+            return L;
+        }
+        L = L->next;
+    }
+    return nullptr;
+}
+void showLagu(listLagu LL){
+    adrLagu L = LL.first;
+
+    cout << "--- LAGU YANG TERSEDIA ---" << endl;
+    while(L != nullptr){
+        cout << "[" << L->idLagu << "] " << L->judul << " by " << L->artis
+            << ". Genre: " << L->genre << ". Durasi: " << L->durasi << endl;
+        L = L->next;
+    }
+    cout << endl;
+}
+void updateLagu(listLagu &LL){
+    string judulLama, judulBaru, artisBaru, genreBaru;
+    int durasiBaru, pilih;
+    adrLagu statusLagu;
+    adrLagu L = LL.first;
+
+    cout << "--- UPDATE LAGU ---" << endl;
+    cout << "Masukkan Judul yang ingin diupdate: ";
+    cin >> judulLama;
+    statusLagu = findLaguByJudul(LL, judulLama);
+
+    while(L != nullptr){
+        if(L->judul != judulLama){
+            cout << "Judul lagu tidak ditemukan!";
+            return;
+        }else{
+            cout << "=== Edit Lagu ===" << endl;
+            cout << "judul baru: ";
+            cin >> judulBaru;
+            cout << "Artis baru: ";
+            cin >> artisBaru;
+            cout << "genre baru: ";
+            cin >> genreBaru;
+            cout << "durasi baru: ";
+            cin >> durasiBaru;
+
+            L->judul = judulBaru;
+            L->artis = artisBaru;
+            L->genre = genreBaru;
+            L->durasi = durasiBaru;
+
+            cout << "Lagu berhasil diubah!";
+        }
+        L = L->next;
+    }
+}
 
 //LIST PLAYLIST
 adrPlaylist createPlaylist(string nama, string id){
@@ -216,12 +331,10 @@ FS: mengembalikan elemen playlist (P) yang sudah terisi playlist dan id playlist
 */
     adrPlaylist P = new Playlist;
 
-    P->nama = nama;
+    P->namaPlaylist = nama;
     P->idPlaylist = id;
     P->next = nullptr;
     P->prev = nullptr;
-    P->relasiToLagu = nullptr;
-    P->relastiToAkun = nullptr;
 
     return P;
 }
@@ -229,8 +342,8 @@ void createListPlaylist(listPlaylist &LP){
 /* IS: -
 FS: first dan last list playlist berisi null
 */
-    LP->first = nullptr;
-    LP->last = nullptr;
+    LP.first = nullptr;
+    LP.last = nullptr;
 }
 bool isEmptyPlaylist(listPlaylist LP){
 /* IS: -
@@ -256,7 +369,7 @@ void deleteFirstPlaylist(listPlaylist &LP, adrPlaylist &P){
 FS: akun sudah terhapus dari list dan di simpan di dalam P.
 */
     if(isEmptyPlaylist(LP)){
-        cout << "tidak ada Playlist yang terdaftar" endl;
+        cout << "tidak ada Playlist yang terdaftar" << endl;
     }else if(LP.first == LP.last){
         P = LP.first;
         LP.first = nullptr;
@@ -273,7 +386,7 @@ void deleteAfterPlaylist(listPlaylist &LP,adrPlaylist prec, adrPlaylist &P){
 FS: akun sudah terhapus dari list dan di simpan di dalam P.
 */
     if(isEmptyPlaylist(LP)){
-        cout << "tidak ada Playlist yang terdaftar" endl;
+        cout << "tidak ada Playlist yang terdaftar" << endl;
     }else if(LP.first == LP.last){
         P = LP.first;
         LP.first = nullptr;
@@ -281,7 +394,7 @@ FS: akun sudah terhapus dari list dan di simpan di dalam P.
     }else{
         P = prec->next;
         prec->next = P->next;
-        (P>next)->prev = prec;
+        (P->next)->prev = prec;
         P->next = nullptr;
         P->prev = nullptr;
     }
@@ -291,36 +404,79 @@ void deleteLastPlaylist(listPlaylist &LP, adrPlaylist &P){
 FS: akun sudah terhapus dari list dan di simpan di dalam P.
 */
     if(isEmptyPlaylist(LP)){
-        cout << "tidak ada Playlist yang terdaftar" endl;
+        cout << "tidak ada Playlist yang terdaftar" << endl;
     }else if(LP.first == LP.last){
         P = LP.first;
         LP.first = nullptr;
         LP.last = nullptr;
     }else{
-        P = LA.last;
+        P = LP.last;
         LP.last = P->prev;
         LP.last->next = nullptr;
         P->prev = nullptr;
     }
 };
-adrPlaylist findPlaylist(listPlaylist P, string namaPlaylist);
-void showPlaylist(listPlaylist LP);
-void updatePlaylist(listPlaylist &LP, string id, string namaPlaylist);
+adrPlaylist findPlaylist(listPlaylist LP, string namaPlaylist){
+    adrPlaylist P = LP.first;
+
+    while(P != nullptr){
+        if(P->namaPlaylist == namaPlaylist){
+            return P;
+        }
+        P = P->next;
+    }
+    return nullptr;
+}
+void showPlaylist(listPlaylist LP){
+    adrPlaylist P = LP.first;
+    cout << "--- PLAYLIST YANG TERDAFTAR ---" << endl;
+    while (P != nullptr){
+        cout << "[" << P->idPlaylist << "] " << P->namaPlaylist << endl;
+        P = P->next;
+    }
+    cout << endl;
+}
+void updatePlaylist(listPlaylist &LP){
+    string namaLama, namaBaru;
+    adrPlaylist statusPlaylist;
+    adrPlaylist P = LP.first;
+
+    cout << "--- UPDATE PLAYLIST ---" << endl;
+    cout << "Masukkan nama playlist yang ingin diubah: ";
+    cin >> namaLama;
+    statusPlaylist = findPlaylist(LP, namaLama);
+
+    while(P != nullptr){
+        if(P != statusPlaylist){
+            cout << "Playlist tidak ditemukan!";
+            return;
+        }else{
+            cout << "=== Edit Playlist ===" << endl;
+            cout << "Masukkan nama playlist baru: ";
+            cin >> namaBaru;
+
+            P->namaPlaylist = namaBaru;
+
+            cout << "nama playlist berhasil diubah" << endl << endl;
+        }
+        P = P->next;
+    }
+}
 
 //LIST RELASI PLAYLIST TO LAGU
 adrPlaylistToLagu createRelasiPlaylistToLagu(adrPlaylist P, adrLagu L){
     adrPlaylistToLagu ptl = new PlaylistToLagu;
 
-    ptl->playlist = p;
-    ptl->lagu = l;
+    ptl->playlist = P;
+    ptl->lagu = L;
     ptl->next = nullptr;
     ptl->prev = nullptr;
 
     return ptl;
 };
 void createListPlaylistTosLagu(listPlaylistToLagu &LPL){
-    lpl.first = nullptr;
-    lpl.last = nullptr;
+    LPL.first = nullptr;
+    LPL.last = nullptr;
 };
 bool isEmptyPlaylistToLagu(listPlaylistToLagu LPL){
     return LPL.first == nullptr && LPL.last == nullptr;
@@ -335,28 +491,103 @@ void insertPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL){
         LPL.last = PL;
     }
 }
-void deleteFirstPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
-void deleteLastPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
-void deleteAfterPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu prec, adrPlaylistToLagu PL);
-adrPlaylistToLagu findPlaylistLagu(listPlaylistToLagu LPL, adrPlaylist P, adrLagu L);
-adrPlaylistToLagu findPlaylistLagu(listPlaylistToLagu LPL, string idPlaylist, string judulLagu);
-void connectPlaylistToLagu(listPlaylistToLagu &LPL, listPlaylist LP, listLagu LL, string idPlaylist, string judulLagu);
-void disconnectPlaylistToLagu(listPlaylistToLagu &LPL, string idPlaylist, string judulLagu);
+void deleteFirstPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL){
+ if(LPL.first == LPL.last){
+        PL = LPL.first;
+        LPL.first = nullptr;
+        LPL.last = nullptr;
+        delete PL;
+    }else if(LPL.first->next != nullptr){
+        PL = LPL.first;
+        LPL.first = PL->next;
+        PL->next = nullptr;
+        LPL.first->prev = nullptr;
+        delete PL;
+    }
+};
+void deleteLastPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL){
+     if(LPL.first == LPL.last){
+        PL = LPL.last;
+        LPL.first = nullptr;
+        LPL.last = nullptr;
+        delete PL;
+    }else if(LPL.last->prev != nullptr){
+        PL = LPL.last;
+        LPL.last = PL->prev;
+        PL->prev = nullptr;
+        LPL.first->next = nullptr;
+        delete PL;
+    }
+};
+void deleteAfterPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu prec, adrPlaylistToLagu PL){
+      PL = prec->next;
+    prec->next = PL->next;
+    (PL->next)->prev = prec;
+    PL->next = nullptr;
+    PL->prev = nullptr;
+    delete PL;
+}
+adrPlaylistToLagu findPlaylistLagu(listPlaylistToLagu LPL, adrPlaylist P, adrLagu L){
+     adrPlaylistToLagu PL = LPL.first;
+
+    while (PL != nullptr){
+        if(PL->playlist == P && PL->lagu == L){
+            return PL;
+        }
+        PL = PL->next;
+    }
+    return nullptr;
+
+}
+adrPlaylistToLagu findPlaylistLagu(listPlaylistToLagu LPL, string idPlaylist, string judulLagu){
+     adrPlaylistToLagu PL = LPL.first;
+
+    while (PL != nullptr){
+        if(PL->playlist->idPlaylist == idPlaylist && PL->lagu->judul == judulLagu){
+            return PL;
+        }
+        PL = PL->next;
+    }
+    return nullptr;
+
+}
+void connectPlaylistToLagu(listPlaylistToLagu &LPL, listPlaylist LP, listLagu LL, string idPlaylist, string judulLagu){
+      adrPlaylist p = findPlaylist(LP, idPlaylist);
+    adrLagu l = findLaguByJudul(LL, judulLagu);
+    adrPlaylistToLagu pl;
+    if(p != nullptr && l != nullptr){
+        pl = createRelasiPlaylistToLagu(p, l);
+        insertPlaylistToLagu(LPL, pl);
+    }
+
+}
+void disconnectPlaylistToLagu(listPlaylistToLagu &LPL, string idPlaylist, string judulLagu){
+     adrPlaylistToLagu pl;
+     if(pl != nullptr){
+        if(pl == LPL.first){
+            deleteFirstPlaylistToLagu(LPL, pl);
+        }else if(pl == LPL.last){
+            deleteLastPlaylistToLagu(LPL, pl);
+        }else{
+            deleteAfterPlaylistToLagu(LPL, pl->prev, pl);
+        }
+    }
+}
 
 // LIST PLAYLIST TO AKUN
 adrPlaylistToAkun createRelasiPlaylistToAkun(adrPlaylist P, adrAkun A){
     adrPlaylistToAkun pta = new PlaylistToAkun;
 
-    pta->playlist = p;
-    pta->akun = a;
+    pta->playlist = P;
+    pta->akun = A;
     pta->next = nullptr;
     pta->prev = nullptr;
 
     return pta;
 };
 void createListPlaylistToAkun(listPlaylistToAkun &LPA){
-    lpa.first = nullptr;
-    lpa.last = nullptr;
+    LPA.first = nullptr;
+    LPA.last = nullptr;
 };
 bool isEmptyPlaylistToAkun(listPlaylistToAkun LPA);
 void insertPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun PA);
@@ -368,3 +599,51 @@ adrPlaylistToLagu findPlaylistAkun(listPlaylistToAkun LPA, string idPlaylist, st
 void connectPlaylistToAkun(listPlaylistToAkun &LPA, listPlaylist LP, listAkun LA, string idPlaylist, string username);
 void disconnectPlaylistToAkun(listPlaylistToAkun &LPA, string idPlaylist, string username);
 
+void displayUtama(listAkun &LA, listPlaylist &LP, listLagu &LL){
+    string username, password, role, idLagu, judulLagu, artisLagu, genreLagu, idPlaylist, namaPlaylist;
+    int durasiLagu, i;
+    adrAkun A;
+    adrPlaylist P;
+    adrLagu L;
+    createListAkun(LA);
+    for (i = 0; i<3; i++){
+        cout << "username akun: ";
+        cin >> username;
+        cout << "Passwarod akun: ";
+        cin >> password;
+        cout << "role: ";
+        cin >> role;
+        A = createakun(username, password, role);
+        insertAkun(LA, A);
+    }
+    showAkun(LA);
+
+    createListLagu(LL);
+    for (i = 0; i<3; i++){
+        cout << "ID Lagu: ";
+        cin >> idLagu;
+        cout << "Judul Lagu: ";
+        cin >> judulLagu;
+        cout << "Artis: ";
+        cin >> artisLagu;
+        cout << "genre : ";
+        cin >> genreLagu;
+        cout << "Durasi: ";
+        cin >> durasiLagu;
+
+        L = createLagu(idLagu, judulLagu, artisLagu, genreLagu, durasiLagu);
+        insertLagu(LL, L);
+    }
+    showLagu(LL);
+
+    createListAkun(LA);
+    for (i = 0; i<3; i++){
+        cout << "ID Playlist: ";
+        cin >> idPlaylist;
+        cout << "Nama Playlist: ";
+        cin >> namaPlaylist;
+        P = createPlaylist(idPlaylist, namaPlaylist);
+        insertPlaylist(LP, P);
+    }
+    showPlaylist(LP);
+}
