@@ -2,9 +2,7 @@
 
 // LIST AKUN
 adrAkun createakun(string username, string password, string role){
-/* IS: terdefinisi string username, password, dan role
-FS: mengembalikan elemen akun (A) yang sudah terisi username, password, dan role
-*/
+// Membuat elemen akun
     adrAkun A = new Akun;
 
     A->username = username;
@@ -16,35 +14,34 @@ FS: mengembalikan elemen akun (A) yang sudah terisi username, password, dan role
     return A;
 }
 void createListAkun(listAkun &LA){
-/* IS: -
-FS: first dan last list akun berisi null
-*/
+// Membuat list akun
     LA.first = nullptr;
     LA.last = nullptr;
 }
 bool isEmptyAkun(listAkun LA){
-/* IS: -
-FS: mengembalikan TRUE jika list akun kosong
-*/
+// Mengecek apakah listAkun kosong atau tidak. listAkun kosong -> TRUE
     return LA.first == nullptr && LA.last == nullptr;
 }
 void insertAkun(listAkun &LA, adrAkun A){
-/* IS: terdefinisi list akun yang mungkin kosong dan elemen akun yang ingin dimasukkan
-FS: list akun dengan elemen akun A berada di akhir list.
-*/
+// Memasukkan elemen akun ke bagian terakhir listAkun
+    adrAkun username;
     if (isEmptyAkun(LA)){
         LA.first = A;
         LA.last = A;
     }else {
-        LA.last->next = A;
-        A->prev = LA.last;
-        LA.last = A;
+        //Mengecek apakah username akun sudah dipakai atau belum
+        username = findAkun(LA, A->username);
+        if(username != nullptr){
+            cout << "Username sudah dipakai";
+        }else {
+                LA.last->next = A;
+            A->prev = LA.last;
+            LA.last = A;
+        }
     }
 }
 void deleteFirstAkun(listAkun &LA, adrAkun &A){
-/* IS: terdefinisi list akun yang mungkin kosong atau hanya satu elemen
-FS: akun sudah terhapus dari list dan di simpan di dalam A.
-*/
+// Menghapus elemen pertama listAkun
     if(isEmptyAkun(LA)){
         cout << "tidak ada akun" << endl;
     }else if(LA.first == LA.last){
@@ -59,9 +56,7 @@ FS: akun sudah terhapus dari list dan di simpan di dalam A.
     }
 }
 void deleteAfterAkun(listAkun &LA,adrAkun prec, adrAkun &A){
-/* IS: terdefinisi list akun yang mungkin kosong dan hanya satu elemen
-FS: akun sudah terhapus dari list dan di simpan di dalam A.
-*/
+// Menghapus elemen setelah prec pada listAkun
     if(isEmptyAkun(LA)){
         cout << "tidak ada akun yang terdaftar" << endl;
     }else if(LA.first == LA.last){
@@ -77,9 +72,7 @@ FS: akun sudah terhapus dari list dan di simpan di dalam A.
     }
 }
 void deleteLastAkun(listAkun &LA, adrAkun &A){
-/* IS: terdefinisi list akun yang mungkin kosong dan hanya satu elemen
-FS: akun sudah terhapus dari list dan di simpan di dalam A.
-*/
+//Menghapus elemen terakhir listAkun
     if(isEmptyAkun(LA)){
         cout << "tidak ada akun yang terdaftar" << endl;
     }else if(LA.first == LA.last){
@@ -94,11 +87,8 @@ FS: akun sudah terhapus dari list dan di simpan di dalam A.
     }
 }
 adrAkun findAkun(listAkun LA, string username){
-/*IS: terdefinisi list akun yang tidak kosong dan username akun yang ingin dicari
-FS: mengembalikan address akun sesuai username
-*/
+//Mencari akun berdasarkan username dan mengembalikan alamat elemen akun
     adrAkun A = LA.first;
-
     while(A != nullptr){
         if(A->username == username){
             return A;
@@ -108,9 +98,7 @@ FS: mengembalikan address akun sesuai username
     return nullptr;
 }
 void showAkun(listAkun LA){
-/*IS: terdefinisi list akun yang tidak kosong
-FS: menampilkan list username akun yang terdaftar
-*/
+//Menampilkan akun-akun yang terdaftar
     adrAkun A = LA.first;
     cout << "--- AKUN YANG TERDAFTAR ---" << endl;
     while (A != nullptr){
@@ -120,10 +108,7 @@ FS: menampilkan list username akun yang terdaftar
     cout << endl;
 }
 void updateAkun(listAkun &LA){
-/* IS: terdefinisi list akun yang tidak kosong
-FS: Akun sudah terisi dengan username dan password baru
-User akan memasukkan username sebelumnya, jika ditemukan, user dapat mengedit akunnya
-*/
+//Mengubah username dan password akun yang sudah dicari berdasarkan username lama
     string usernameLama, usernameBaru, passwordBaru;
     adrAkun statusAkun;
     adrAkun A = LA.first;
@@ -152,14 +137,10 @@ User akan memasukkan username sebelumnya, jika ditemukan, user dapat mengedit ak
         A = A->next;
     }
 }
-
 //LIST LAGU
 adrLagu createLagu(string idLagu, string judul, string artis, string genre, int durasi){
-/* IS: terdefinisi idLagu, judul, artis, genre, dan durasi
-FS: mengembalikan elemen lagu (L) yang sudah terisi idLagu, judul, artis, genre, dan durasi
-*/
+//Membuat elemen lagu
     adrLagu L = new Lagu;
-
     L->idLagu = idLagu;
     L->judul = judul;
     L->artis = artis;
@@ -167,45 +148,36 @@ FS: mengembalikan elemen lagu (L) yang sudah terisi idLagu, judul, artis, genre,
     L->durasi = durasi;
     L->next = nullptr;
     L->prev = nullptr;
-
     return L;
 }
 void createListLagu(listLagu &LL){
-/* IS: -
-FS: first dan last list lagu berisi null
-*/
+//Membuat list lagu
     LL.first = nullptr;
     LL.last = nullptr;
 }
 bool isEmptyLagu(listLagu LL){
-/* IS: -
-FS: mengembalikan TRUE jika list lagu kosong
-*/
+//Mengecek apakah listLagu kosong atau tidak. listLagu kosong -> TRUE
     return LL.first == nullptr && LL.last == nullptr;
 }
 void insertLagu(listLagu &LL, adrLagu L){
-/* IS: terdefinisi list lagu yang mungkin kosong dan elemen lagu yang ingin dimasukkan
-FS: list akun dengan elemen lagu L berada di akhir list.
-*/
+//Memasukkan elemen lagu ke bagian akhir list lagu
     if (isEmptyLagu(LL)){
         LL.first = L;
         LL.last = L;
     }else {
+        //Mengecek apakah idLagu sudah ada atau tidak
         adrLagu id = findLaguByID(LL, L->idLagu);
-        if (id == nullptr){
+        if (id != nullptr){
+            cout << "ID lagu sudah dipakai";
+        }else{
             LL.last->next = L;
             L->prev = LL.last;
             LL.last = L;
-        }else{
-            cout << "ID already exist";
         }
-
     }
 }
 void deleteFirstLagu(listLagu &LL, adrLagu &L){
-/* IS: terdefinisi list lagu yang mungkin kosong atau hanya satu elemen
-FS: akun sudah terhapus dari list dan di simpan di dalam L.
-*/
+//Menghapus elemen pertama listLagu
     if(isEmptyLagu(LL)){
         cout << "tidak ada lagu yang terdaftar" << endl;
     }else if(LL.first == LL.last){
@@ -220,9 +192,7 @@ FS: akun sudah terhapus dari list dan di simpan di dalam L.
     }
 }
 void deleteAfterLagu(listLagu &LL,adrLagu prec, adrLagu &L){
-/* IS: terdefinisi list lagu yang mungkin kosong atau hanya satu elemen
-FS: akun sudah terhapus dari list dan di simpan di dalam L.
-*/
+//Menghapus elemen setelah prec pada listLagu
     if(isEmptyLagu(LL)){
         cout << "tidak ada lagu yang terdaftar" << endl;
     }else if(LL.first == LL.last){
@@ -238,9 +208,7 @@ FS: akun sudah terhapus dari list dan di simpan di dalam L.
     }
 }
 void deleteLastLagu(listLagu &LL, adrLagu &L){
-/* IS: terdefinisi list lagu yang mungkin kosong atau hanya satu elemen
-FS: akun sudah terhapus dari list dan di simpan di dalam L.
-*/
+//Menghapus elemen terakhir listLagu
     if(isEmptyLagu(LL)){
         cout << "tidak ada lagu yang terdaftar" << endl;
     }else if(LL.first == LL.last){
@@ -255,8 +223,8 @@ FS: akun sudah terhapus dari list dan di simpan di dalam L.
     }
 };
 adrLagu findLaguByID(listLagu LL, string id){
+//Mencari elemen lagu berdasarkan id lagu
     adrLagu L = LL.first;
-
     while (L != nullptr){
         if(L->idLagu == id){
             return L;
@@ -266,8 +234,8 @@ adrLagu findLaguByID(listLagu LL, string id){
     return nullptr;
 }
 adrLagu findLaguByJudul(listLagu LL, string judul){
+//Mencari elemen lagu berdasarkan judul lagu
     adrLagu L = LL.first;
-
     while (L != nullptr){
         if(L->judul == judul){
             return L;
@@ -277,8 +245,8 @@ adrLagu findLaguByJudul(listLagu LL, string judul){
     return nullptr;
 }
 void showLagu(listLagu LL){
+//menampilkan lagu di dalam library
     adrLagu L = LL.first;
-
     cout << "--- LAGU YANG TERSEDIA ---" << endl;
     while(L != nullptr){
         cout << "[" << L->idLagu << "] " << L->judul << " by " << L->artis
@@ -288,6 +256,7 @@ void showLagu(listLagu LL){
     cout << endl;
 }
 void updateLagu(listLagu &LL){
+//mengubah atribut lagu
     string judulLama, judulBaru, artisBaru, genreBaru;
     int durasiBaru, pilih;
     adrLagu statusLagu;
@@ -323,7 +292,6 @@ void updateLagu(listLagu &LL){
         L = L->next;
     }
 }
-
 //LIST PLAYLIST
 adrPlaylist createPlaylist(string nama, string id){
 /* IS: terdefinisi nama playlist dan id playlist
@@ -799,8 +767,7 @@ void playLaguFromLibrary(listLagu LL){
         }
     }
 }
-void dataDummy(listLagu &LL, listAkun &LA, listPlaylist &LP){
-
+void dataDummy(listLagu &LL, listAkun &LA, listPlaylist &LP, listPlaylistToLagu &LPL, listPlaylistToAkun &LPA){
     insertAkun(LA, createakun("rai","123", "admin"));
     insertAkun(LA, createakun("hasna","123", "user"));
     insertAkun(LA, createakun("irfan","123", "user"));
@@ -812,6 +779,28 @@ void dataDummy(listLagu &LL, listAkun &LA, listPlaylist &LP){
     insertLagu(LL, createLagu("05", "Love.", "Wave-to-Earth", "RnB", 3));
     insertLagu(LL, createLagu("06", "Best-Friend", "Rex-Orange-County", "Pop", 4));
     insertLagu(LL, createLagu("07", "Promise", "Laufey", "Jazz", 3));
-    insertLagu(LL, createLagu("08", "Nocturne-Op.9-No.2", "Frederic Chopin", "Classical", 5));
+    insertLagu(LL, createLagu("08", "Nocturne-Op.9-No.2", "Frederic-Chopin", "Classical", 5));
+    insertLagu(LL, createLagu("09", "Viva-La-Vida", "Coldplay", "Pop", 2));
+    insertLagu(LL, createLagu("10", "Counting-Stars", "One-Republic", "Pop", 3));
+    insertLagu(LL, createLagu("11", "Rolling-In-The-Deep", "Adele", "Pop", 4));
+    insertLagu(LL, createLagu("12", "Pump-It", "The-Black-Eyed-Peas", "R&B", 3));
+    insertLagu(LL, createLagu("13", "Dream-On", "Aerosmith", "Rock", 4));
+    insertLagu(LL, createLagu("14", "That's-Life", "Frank-Sinatra", "Pop", 3));
+    insertLagu(LL, createLagu("15", "Alone", "Alan-Walker", "Dance/Electronic", 3));
+
+    insertPlaylist(LP, createPlaylist("asik", "1"));
+    insertPlaylist(LP, createPlaylist("nostalgic", "2"));
+    insertPlaylist(LP, createPlaylist("mixed", "3"));
+
+    connectPlaylistToLagu(LPL, LP, LL, "1", "Viva-La-Vida");
+    connectPlaylistToLagu(LPL, LP, LL, "1", "Alone");
+    connectPlaylistToLagu(LPL, LP, LL, "2", "Nocture-Op.9-No.2");
+    connectPlaylistToLagu(LPL, LP, LL, "2", "Dream-On");
+    connectPlaylistToLagu(LPL, LP, LL, "3", "Pump-It");
+    connectPlaylistToLagu(LPL, LP, LL, "3", "Rolling-In-The-Deep");
+    connectPlaylistToLagu(LPL, LP, LL, "3", "Creep");
+
+    connectPlaylistToAkun(LPA, LP, LA, "2", "hasna");
+    connectPlaylistToAkun(LPA, LP, LA, "3", "irfan");
 
 };

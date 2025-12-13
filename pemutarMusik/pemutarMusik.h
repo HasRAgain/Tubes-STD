@@ -164,7 +164,7 @@ void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA);
 //fitur
 void rekomendasiLagu();
 void kelolaPlaylist();
-void playLaguFromLibrary();
+void playLaguFromLibrary(listLagu LL);
 void playlistAkunLain();
 
 
@@ -177,6 +177,6 @@ void deleteLagu(listLagu LL,adrLagu L);
 void deleteAkun(listAkun LA,adrAkun A);
 void deletePlaylist(listPlaylist LP,adrPlaylist P);
 
-void dataDummy(listLagu &LL, listAkun &LA, listPlaylist &LP);
+void dataDummy(listLagu &LL, listAkun &LA, listPlaylist &LP, listPlaylistToLagu &LPL, listPlaylistToAkun &LPA);
 
 #endif // PEMUTARMUSIK_H_INCLUDED

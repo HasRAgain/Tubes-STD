@@ -1,4 +1,5 @@
 #include "pemutarMusik.h"
+/*
 listLagu LL;
 listAkun LA;
 listPlaylist LP;
@@ -6,6 +7,7 @@ listPlaylist LP;
 adrAkun A;
 adrLagu L;
 adrPlaylist P;
+*/
 void adminMenu() {
     int pilih;
     bool admin = true ;
@@ -50,38 +52,53 @@ void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA) {
     cout << "7. Logout\n";
     cout << "Pilih 1/2/3/4/5/6: ";
     cin >> pilih;
-while (user){
-    if(pilih == 1){
-        showLagu(LL);
-        cout << "Kembali ke menu";
-    }else if (pilih == 2){
-        cout << "--- Cari Lagu Berdasarkan Judul ---";
-        cout << "Masukkan judul lagu yang ingin dicari: ";
-        cin >> judulLagu;
-        if (findLaguByJudul(LL, judulLagu) != nullptr){
-            cout << "Lagu ditemukan!" << endl;
-        }else{
-            cout << "Lagu tidak ditemukan " << endl;
+    while (user){
+        if(pilih == 1){
+            showLagu(LL);
+            cout << "Kembali ke menu";
+        }else if (pilih == 2){
+            cout << "--- Cari Lagu Berdasarkan Judul ---";
+            cout << "Masukkan judul lagu yang ingin dicari: ";
+            cin >> judulLagu;
+            if (findLaguByJudul(LL, judulLagu) != nullptr){
+                cout << "Lagu ditemukan!" << endl;
+            }else{
+                cout << "Lagu tidak ditemukan " << endl;
+            }
+        }else if(pilih == 3){
+            playLaguFromLibrary(LL);
+        }else if(pilih == 4){
+            cout << "Kelola Playlist" << endl;
+            cout << "1. Membuat playlist baru \n";
+            cout << "2. Menghapus playlist \n";
+            cout << "3. Lihat playlist \n";
+            cout << "4. Menambah lagu ke playlist \n";
+            cout << "5. Hapus lagu dari playlist \n";
+
+            int opsiPlaylist;
+            cin >> opsiPlaylist;
+            if (opsiPlaylist == 1){
+                string namaPlaylist, idPlaylist;
+                cout << "Nama Playlist: ";
+                cin >> namaPlaylist;
+                cout << "ID Playlist: ";
+                cin >> idPlaylist;
+                insertPlaylist(LP, createPlaylist(namaPlaylist, idPlaylist));
+            }else if(opsiPlaylist == 2){
+                //deletePlaylist(LP, )
+            }
+        }else if(pilih == 5){
+            //PlaylistAkunLain();
+        }else if (pilih == 6){
+            //malingplaylist
+        }else if(pilih == 7){
+            user = false;
         }
-    }else if(pilih == 3){
-        playLaguFromLibrary(LL);
-    }else if(pilih == 4){
-        //kelola playlist();
-    }else if(pilih == 5){
-        //PlaylistAkunLain();
-    }else if (pilih == 6){
-        //malingplaylist
-    }else if(pilih == 7){
-        user = false;
     }
 }
-}
 
-void menuUtama() {
-    listAkun LA;
+void menuUtama(listPlaylist &LP, listAkun &LA) {
     createListAkun(LA);
-    listPlaylist LP;
-    listLagu LL;
     adrAkun A, cariAkun;
     string username, password;
 
@@ -164,7 +181,17 @@ int main()
     listAkun LA;
     listPlaylist LP;
     listLagu LL;
+    listPlaylistToLagu LPL;
+    listPlaylistToAkun LPA;
+
+    createListAkun(LA);
+    createListLagu(LL);
+    createListPlaylist(LP);
+    createListPlaylistToAkun(LPA);
+    createListPlaylistToLagu(LPL);
+
     menuUtama();
+    dataDummy(LL, LA, LP, LPL, LPA);
   //  displayUtama(LA, LP, LL);
     return 0;
 
