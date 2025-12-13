@@ -177,4 +177,6 @@ void deleteLagu(listLagu LL,adrLagu L);
 void deleteAkun(listAkun LA,adrAkun A);
 void deletePlaylist(listPlaylist LP,adrPlaylist P);
 
+void dataDummy(listLagu &LL, listAkun &LA, listPlaylist &LP);
+
 #endif // PEMUTARMUSIK_H_INCLUDED

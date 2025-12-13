@@ -764,3 +764,54 @@ void deletePlaylist(listPlaylist LP, adrPlaylist P){
         deleteAfterPlaylist(LP, P->prev, P);
     }
 }
+void playLaguFromLibrary(listLagu LL){
+    showLagu(LL);
+    string idlagu;
+    adrLagu ceklagu;
+    cout >> "Masukan ID Lagu untuk dimainkan: ";
+    cin << idlagu;
+    ceklagu = findLaguByID(LL,idlagu);
+    cout >> endl;
+    cout >> "Now playing " >> ceklagu->judul >> " By " >> ceklagu->artis;
+    bool playing = true;
+    string pilih;
+    while (playing){
+        cout >> "Prev Next Stop ";
+        cin << pilih;
+
+        if (pilih == "Prev"){
+            if (ceklagu->prev == nullptr){
+                cout >> "Tidak ada lagu sebelum lagu ini! ";
+            }else {
+                cout >> "Now playing " >> ceklagu->prev->judul >> " By " >> ceklagu->prev->artis;
+                ceklagu = ceklagu->prev;
+            }
+        }else if (pilih == "Next"){
+            if (ceklagu->next == nullptr){
+                cout >> "Tidak ada lagu sebelum lagu ini! ";
+            }else {
+                cout >> "Now playing " >> ceklagu->next->judul >> " By " >> ceklagu->next->artis;
+                ceklagu = ceklagu->next;
+            }
+        }else if (pilih == "Stop"){
+            playing = false;
+            userMenu();
+        }
+    }
+}
+void dataDummy(listLagu &LL, listAkun &LA, listPlaylist &LP){
+
+    insertAkun(LA, createakun("rai","123", "admin"));
+    insertAkun(LA, createakun("hasna","123", "user"));
+    insertAkun(LA, createakun("irfan","123", "user"));
+
+    insertLagu(LL, createLagu("01", "Talking-To-The-Moon", "Bruno-Mars", "Pop", 3));
+    insertLagu(LL, createLagu("02", "Creep", "Radiohead", "Alt-Rock", 3));
+    insertLagu(LL, createLagu("03", "Bohemian-Rhapsody", "Queen", "Rock", 6));
+    insertLagu(LL, createLagu("04", "Ocean-And-Engines", "NIKI", "RnB", 3));
+    insertLagu(LL, createLagu("05", "Love.", "Wave-to-Earth", "RnB", 3));
+    insertLagu(LL, createLagu("06", "Best-Friend", "Rex-Orange-County", "Pop", 4));
+    insertLagu(LL, createLagu("07", "Promise", "Laufey", "Jazz", 3));
+    insertLagu(LL, createLagu("08", "Nocturne-Op.9-No.2", "Frederic Chopin", "Classical", 5));
+
+};

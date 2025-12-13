@@ -46,9 +46,8 @@ void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA) {
     cout << "3. Play lagu dari library\n";
     cout << "4. Kelola Playlist (buat/hapus/lihat/tambah/hapus lagu)\n";
     cout << "5. Lihat playlist akun lain\n";
-    cout << "6. Rekomendasi lagu \n";
-    cout << "7. Mengambil Playlist user lain \n";
-    cout << "8. Logout\n";
+    cout << "6. Mengambil Playlist user lain \n";
+    cout << "7. Logout\n";
     cout << "Pilih 1/2/3/4/5/6: ";
     cin >> pilih;
 while (user){
@@ -65,17 +64,14 @@ while (user){
             cout << "Lagu tidak ditemukan " << endl;
         }
     }else if(pilih == 3){
-        showLagu(LL);
-        // playLaguFromLibrary(LL);
+        playLaguFromLibrary(LL);
     }else if(pilih == 4){
         //kelola playlist();
     }else if(pilih == 5){
         //PlaylistAkunLain();
     }else if (pilih == 6){
-        //showLagu()
-    }else if (pilih == 7){
         //malingplaylist
-    }else if(pilih == 8){
+    }else if(pilih == 7){
         user = false;
     }
 }
