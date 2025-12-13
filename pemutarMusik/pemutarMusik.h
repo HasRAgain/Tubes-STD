@@ -82,9 +82,10 @@ adrAkun createakun(string username, string password, string role);
 void createListAkun(listAkun &LA);
 bool isEmptyAkun(listAkun LA);
 void insertAkun(listAkun &LA, adrAkun A);
-void deleteFirstAkun(listAkun &LA, adrAkun &A);
-void deleteAfterAkun(listAkun &LA,adrAkun prec, adrAkun &A);
-void deleteLastAkun(listAkun &LA, adrAkun &A);
+void deleteFirstAkun(listAkun &LA, adrAkun A);
+void deleteAfterAkun(listAkun &LA,adrAkun prec, adrAkun A);
+void deleteLastAkun(listAkun &LA, adrAkun A);
+void deleteAkun(listAkun &LA, adrAkun A);
 adrAkun findAkun(listAkun LA, string username);
 void showAkun(listAkun LA);
 void updateAkun(listAkun &LA);
@@ -94,9 +95,10 @@ adrLagu createLagu(string idLagu, string judul, string artis, string genre, int 
 void createListLagu(listLagu &LL);
 bool isEmptyLagu(listLagu LL);
 void insertLagu(listLagu &LL, adrLagu L);
-void deleteFirstLagu(listLagu &LL, adrLagu &L);
-void deleteAfterLagu(listLagu &LL,adrLagu prec, adrLagu &L);
-void deleteLastLagu(listLagu &LL, adrLagu &L);
+void deleteFirstLagu(listLagu &LL, adrLagu L);
+void deleteAfterLagu(listLagu &LL,adrLagu prec, adrLagu L);
+void deleteLastLagu(listLagu &LL, adrLagu L);
+void deleteLagu(listLagu &LL, adrLagu L);
 adrLagu findLaguByID(listLagu LL, string id);
 adrLagu findLaguByJudul(listLagu LL, string judul);
 void showLagu(listLagu LL);
@@ -107,10 +109,12 @@ adrPlaylist createPlaylist(string nama, string id);
 void createListPlaylist(listPlaylist &LP);
 bool isEmptyPlaylist(listPlaylist LP);
 void insertPlaylist(listPlaylist &LP, adrPlaylist P);
-void deleteFirstPlaylist(listPlaylist &LP, adrPlaylist &P);
-void deleteAfterPlaylist(listPlaylist &LP,adrPlaylist prec, adrPlaylist &P);
-void deleteLastPlaylist(listPlaylist &LP, adrPlaylist &P);
-adrPlaylist findPlaylist(listPlaylist P, string namaPlaylist);
+void deleteFirstPlaylist(listPlaylist &LP, adrPlaylist P);
+void deleteAfterPlaylist(listPlaylist &LP,adrPlaylist prec, adrPlaylist P);
+void deleteLastPlaylist(listPlaylist &LP, adrPlaylist P);
+void deletePlaylist(listPlaylist &LP, adrPlaylist P);
+adrPlaylist findPlaylistByName(listPlaylist LP, string namaPlaylist);
+adrPlaylist findPlaylistById(listPlaylist LP, string idPlaylist);
 void showPlaylist(listPlaylist LP);
 void updatePlaylist(listPlaylist &LP);
 
@@ -140,14 +144,14 @@ adrPlaylistToAkun createRelasiPlaylistToAkun(adrPlaylist P, adrAkun A);
 void createListPlaylistToAkun(listPlaylistToAkun &LPA);
 bool isEmptyPlaylistToAkun(listPlaylistToAkun LPA);
 void insertPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun PA);
-void deleteFirstPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun &PA);
-void deleteAfterPlaylistToAkun(listPlaylistToAkun &LPA,adrPlaylistToAkun prec, adrPlaylistToAkun &PA);
-void deleteLastPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun &PA);
+void deleteFirstPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun PA);
+void deleteAfterPlaylistToAkun(listPlaylistToAkun &LPA,adrPlaylistToAkun prec, adrPlaylistToAkun PA);
+void deleteLastPlaylistToAkun(listPlaylistToAkun &LPA, adrPlaylistToAkun PA);
 // mencari elemen playlist & akun
 // a. menggunakan address playlist & akun
 adrPlaylistToAkun findPlaylistAkun(listPlaylistToAkun LPA, adrPlaylist P, adrAkun A);
 // b. menggunakan idPlaylist dan username akun
-adrPlaylistToAkun findPlaylistAkun(listPlaylistToAkun LPA, string username);
+adrPlaylistToAkun findPlaylistAkun(listPlaylistToAkun LPA, string idPlaylist, string username);
 /* Connect: menyambung list playlist dengan list akun
 Disconnect: memutus hubungan list playlist dengan list akun
 */
@@ -156,27 +160,28 @@ void disconnectPlaylistToAkun(listPlaylistToAkun &LPA, string idPlaylist, string
 // Menampilkan list relasi playlistToLagu terhadap playlist
 //void printPlaylistToAkun(lsitPlaylistToAkun LPA, listPlaylist LP)
 
+void playLaguFromLibrary(listLagu LL);
+void printPlaylistToLagu(listPlaylistToLagu LPL, listPlaylist LP);
+void dataDummy(listLagu &LL, listAkun &LA, listPlaylist &LP, listPlaylistToLagu &LPL, listPlaylistToAkun &LPA);
+void adminMenu(listLagu &LL, listAkun &LA);
+void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu &LPL, listPlaylistToAkun &LPA);
+void menuUtama(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu &LPL, listPlaylistToAkun &LPA);
+/*
 //void displayUtama(listAkun &LA, listPlaylist &LP, listLagu &LL);
 void menuUtama();
 void adminMenu();
 void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA);
 
 //fitur
-void rekomendasiLagu();
 void kelolaPlaylist();
-void playLaguFromLibrary(listLagu LL);
 void playlistAkunLain();
 
 
-/*
+
 void addLaguToPlaylist(listPlaylist &LP, adrLagu L);
 void removeLaguToPlaylist(listPlaylist &LP, string judul);
 void removeLaguToAllPlaylist(listAkun &LA, string judul);
+
+
 */
-void deleteLagu(listLagu LL,adrLagu L);
-void deleteAkun(listAkun LA,adrAkun A);
-void deletePlaylist(listPlaylist LP,adrPlaylist P);
-
-void dataDummy(listLagu &LL, listAkun &LA, listPlaylist &LP, listPlaylistToLagu &LPL, listPlaylistToAkun &LPA);
-
 #endif // PEMUTARMUSIK_H_INCLUDED
