@@ -159,8 +159,15 @@ void disconnectPlaylistToAkun(listPlaylistToAkun &LPA, string idPlaylist, string
 void displayUtama(listAkun &LA, listPlaylist &LP, listLagu &LL);
 void menuUtama();
 void adminMenu();
-void userMenu();
+void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA);
+
 //fitur
+void rekomendasiLagu();
+void kelolaPlaylist();
+void playLaguFromLibrary();
+void playlistAkunLain();
+
+
 /*
 void addLaguToPlaylist(listPlaylist &LP, adrLagu L);
 void removeLaguToPlaylist(listPlaylist &LP, string judul);
