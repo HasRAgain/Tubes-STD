@@ -156,7 +156,7 @@ void disconnectPlaylistToAkun(listPlaylistToAkun &LPA, string idPlaylist, string
 // Menampilkan list relasi playlistToLagu terhadap playlist
 //void printPlaylistToAkun(lsitPlaylistToAkun LPA, listPlaylist LP)
 
-void displayUtama(listAkun &LA, listPlaylist &LP, listLagu &LL);
+//void displayUtama(listAkun &LA, listPlaylist &LP, listLagu &LL);
 void menuUtama();
 void adminMenu();
 void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA);
@@ -173,6 +173,8 @@ void addLaguToPlaylist(listPlaylist &LP, adrLagu L);
 void removeLaguToPlaylist(listPlaylist &LP, string judul);
 void removeLaguToAllPlaylist(listAkun &LA, string judul);
 */
-
+void deleteLagu(listLagu LL,adrLagu L);
+void deleteAkun(listAkun LA,adrAkun A);
+void deletePlaylist(listPlaylist LP,adrPlaylist P);
 
 #endif // PEMUTARMUSIK_H_INCLUDED
