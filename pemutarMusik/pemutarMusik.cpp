@@ -899,15 +899,16 @@ void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu &
     adrLagu lagu;
     adrPlaylist cekPlaylist;
     while (user){
-        cout << "\n--- USER MENU ---\n";
-        cout << "1. Lihat Library\n";
-        cout << "2. Cari lagu berdasarkan judul\n";
-        cout << "3. Play lagu dari library\n";
-        cout << "4. Kelola Playlist (buat/hapus/lihat/tambah/hapus lagu)\n";
-        cout << "5. Lihat playlist akun lain\n";
-        cout << "6. Mengambil Playlist user lain \n";
-        cout << "7. Logout\n";
-        cout << "Pilih 1/2/3/4/5/6: ";
+        cout << "\n--------------------------USER MENU -----------------------|\n";
+        cout << "| 1. Lihat Library\n";
+        cout << "| 2. Cari lagu berdasarkan judul\n";
+        cout << "| 3. Play lagu dari library\n";
+        cout << "| 4. Kelola Playlist (buat/hapus/lihat/tambah/hapus lagu)\n";
+        cout << "| 5. Lihat playlist akun lain\n";
+        cout << "| 6. Mengambil Playlist user lain \n";
+        cout << "| 7. Logout\n";
+        cout << "------------------------------------------------------------|"<<endl;
+        cout << "| Pilih 1/2/3/4/5/6: ";
         cin >> pilih;
 
         if(pilih == 1){
@@ -1000,23 +1001,28 @@ void menuUtama(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu 
 
     while (true) {
         int pilihan;
-        cout << endl << "Selamat Datang" << endl;
-        cout << "1. Login" << endl;
-        cout << "2. Register" << endl;
-        cout << "3. Exit" << endl;
-        cout << "Pilih 1/2/3 : ";
+        cout << endl << "-----SELAMAT DATANG-----|" << endl;
+        cout << "|  1. Login" << endl;
+        cout << "|  2. Register" << endl;
+        cout << "|  3. Exit" << endl;
+        cout << "------------------------|"<< endl;
+        cout << "|  Pilih 1/2/3 : ";
+
         cin >> pilihan;
         cout << endl;
 
         if (pilihan == 1) {
             int x;
-            cout << "1. Login as user" << endl;
-            cout << "2. Login as admin" << endl;
-            cout << "Pilih 1/2 : ";
+            cout << "--------------------|"<<endl;
+            cout << "| 1. Login as User" << endl;
+            cout << "| 2. Login as Admin" << endl;
+            cout << "--------------------|"<<endl;
+            cout << "| Pilih 1/2 : ";
             cin >> x;
             cout << endl;
 
             if (x == 1) {
+                cout << "---------------|"<<endl;
                 cout << "Username: ";
                 cin >> username;
                 cout << "Password: ";
@@ -1059,18 +1065,21 @@ void menuUtama(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu 
         else if (pilihan == 2) {
             string username, password, role;
 
-            cout << "Username : ";
+            cout << "----------------------------------------------|"<<endl;
+            cout << "| Username : ";
             cin >> username;
-            cout << "Password : ";
+            cout << "| Password : ";
             cin >> password;
-            cout << "Role (User/Admin) : ";
+            cout << "| Role (User/Admin) : ";
             cin >> role;
             cariAkun = findAkun(LA, username);
             if(cariAkun != nullptr){
                 cout << "Username sudah dipakai! \n";
+                cout << "----------------------------------------------|"<<endl;
             }else{
                 insertAkun(LA, createakun(username, password, role));
-                cout << "\nRegistrasi berhasil! Kembali ke menu utama...";
+                cout << "\nRegistrasi berhasil! Kembali ke menu utama...\n";
+                cout << "----------------------------------------------|"<<endl;
             }
             cout << endl;
             // otomatis kembali ke atas karena while(true)
