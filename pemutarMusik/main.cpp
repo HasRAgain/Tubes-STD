@@ -54,7 +54,7 @@ void adminMenu(listLagu &LL, listAkun &LA, listPlaylistToLagu &LPL) {
     bool admin = true;
     while (admin){
         cout << "=============================" << endl;
-        cout << "          ADMIN MENU         " << endl;
+        cout << "|          ADMIN MENU       | " << endl;
         cout << "=============================" << endl;
         cout << "| 1. Tambah lagu             |\n";
         cout << "| 2. Lihat semua lagu        |\n";
@@ -70,7 +70,7 @@ void adminMenu(listLagu &LL, listAkun &LA, listPlaylistToLagu &LPL) {
         if (pilih == 1){
             showLagu(LL);
             cout << "-----------------------------" << endl;
-            cout << "         MENAMBAH LAGU       " << endl;
+            cout << "|         MENAMBAH LAGU     |  " << endl;
             cout << "-----------------------------" << endl;
             cout << "ID lagu: ";
             cin >> idLagu;
@@ -99,7 +99,7 @@ void adminMenu(listLagu &LL, listAkun &LA, listPlaylistToLagu &LPL) {
             updateLagu(LL);
         }else if (pilih == 4){
             cout << "-----------------------------" << endl;
-            cout << "          HAPUS LAGU         " << endl;
+            cout << "|          HAPUS LAGU       |  " << endl;
             cout << "-----------------------------" << endl;
             showLagu(LL);
             cout << "ID lagu yang ingin dihapus: ";
@@ -132,7 +132,7 @@ void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu &
     adrAkun cekAkun;
     while (user){
         cout << "=============================" << endl;
-        cout << "           USER MENU         " << endl;
+        cout << "|           USER MENU       |" << endl;
         cout << "=============================" << endl;
         cout << "1. Lihat Library\n";
         cout << "2. Cari lagu berdasarkan judul\n";
@@ -172,7 +172,7 @@ void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu &
             playlist = true;
             while (playlist){
                 cout << "-----------------------------" << endl;
-                cout << "        Kelola Playlist      " << endl;
+                cout << "|        Kelola Playlist    |  " << endl;
                 cout << "-----------------------------" << endl;
                 cout << "1. Membuat playlist baru \n";
                 cout << "2. Menghapus playlist \n";
@@ -187,7 +187,7 @@ void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu &
                 cout << "-----------------------------" << endl;
                 if (opsiPlaylist == 1){
                     cout << "-----------------------------" << endl;
-                    cout << "       Membuat Playlist      " << endl;
+                    cout << "|       Membuat Playlist    |  " << endl;
                     cout << "-----------------------------" << endl;
                     cout << "Nama Playlist: ";
                     cin >> namaPlaylist;
@@ -204,7 +204,7 @@ void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu &
                     }
                 }else if(opsiPlaylist == 2){
                     cout << "-----------------------------" << endl;
-                    cout << "      Menghapus Playlist     " << endl;
+                    cout << "|      Menghapus Playlist   |  " << endl;
                     cout << "-----------------------------" << endl;
                     showPlaylist(LP, LPA, username);
                     cout << "id playlist: ";
