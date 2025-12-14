@@ -86,9 +86,9 @@ void deleteFirstAkun(listAkun &LA, adrAkun A);
 void deleteAfterAkun(listAkun &LA,adrAkun prec, adrAkun A);
 void deleteLastAkun(listAkun &LA, adrAkun A);
 void deleteAkun(listAkun &LA, adrAkun A);
-adrAkun findAkun(listAkun LA, string username);
+adrAkun findAkun(listAkun &LA, string username);
 void showAkun(listAkun LA);
-void updateAkun(listAkun &LA);
+void updateAkun(listAkun &LA, string userAktif);
 
 //subprogram list lagu
 adrLagu createLagu(string idLagu, string judul, string artis, string genre, int durasi);
@@ -98,7 +98,7 @@ void insertLagu(listLagu &LL, adrLagu L);
 void deleteFirstLagu(listLagu &LL, adrLagu L);
 void deleteAfterLagu(listLagu &LL,adrLagu prec, adrLagu L);
 void deleteLastLagu(listLagu &LL, adrLagu L);
-void deleteLagu(listLagu &LL, adrLagu L);
+void deleteLagu(listLagu &LL, listPlaylistToLagu &LPL, adrLagu L);
 adrLagu findLaguByID(listLagu LL, string id);
 adrLagu findLaguByJudul(listLagu LL, string judul);
 void showLagu(listLagu LL);
@@ -126,7 +126,7 @@ void insertPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
 void deleteFirstPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
 void deleteLastPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
 void deleteAfterPlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu prec, adrPlaylistToLagu PL);
-void deletePlaylistToLagu(listPlaylistToLagu LPL, adrPlaylistToLagu PL);
+void deletePlaylistToLagu(listPlaylistToLagu &LPL, adrPlaylistToLagu PL);
 // mencari elemen playlist & lagu
 // a. menggunakan address playlist & lagu
 adrPlaylistToLagu findPlaylistLagu(listPlaylistToLagu LPL, adrPlaylist P, adrLagu L);
@@ -163,26 +163,6 @@ void disconnectPlaylistToAkun(listPlaylistToAkun &LPA, string idPlaylist, string
 //void printPlaylistToAkun(lsitPlaylistToAkun LPA, listPlaylist LP)
 
 void playLaguFromLibrary(listLagu LL);
-void dataDummy(listLagu &LL, listAkun &LA, listPlaylist &LP, listPlaylistToLagu &LPL, listPlaylistToAkun &LPA);
-void adminMenu(listLagu &LL, listAkun &LA);
-void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu &LPL, listPlaylistToAkun &LPA, adrAkun username);
-void menuUtama(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu &LPL, listPlaylistToAkun &LPA);
-/*
-//void displayUtama(listAkun &LA, listPlaylist &LP, listLagu &LL);
-void menuUtama();
-void adminMenu();
-void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA);
-
-//fitur
-void kelolaPlaylist();
-void playlistAkunLain();
-
-
-
-void addLaguToPlaylist(listPlaylist &LP, adrLagu L);
-void removeLaguToPlaylist(listPlaylist &LP, string judul);
-void removeLaguToAllPlaylist(listAkun &LA, string judul);
-
-
-*/
+void playLaguFromPlaylist(listPlaylist LP, listPlaylistToLagu LPL, listPlaylistToAkun LPA, string userAktif);
+void deleteLaguFromAllPlaylist(listPlaylistToLagu &LPL, adrLagu L);
 #endif // PEMUTARMUSIK_H_INCLUDED
