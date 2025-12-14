@@ -132,7 +132,7 @@ void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu &
     adrAkun cekAkun;
     while (user){
         cout << "=============================" << endl;
-        cout << "|           USER MENU       |" << endl;
+        cout << "|          USER MENU        |" << endl;
         cout << "=============================" << endl;
         cout << "1. Lihat Library\n";
         cout << "2. Cari lagu berdasarkan judul\n";
@@ -285,11 +285,13 @@ void userMenu(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu &
             cin >> inputUsername;
             cout << "------------------------------" << endl;
             cekAkun = findAkun(LA, inputUsername);
-            if(cekAkun->role == "user"){
-                printPlaylistToLagu(LPL,LP, LPA, inputUsername);
-                cout << endl;
-            }else{
-                cout << inputUsername << " bukan sebagai user" << endl;
+            if(cekAkun == nullptr){
+                cout << "akun tidak terdaftar untuk " << inputUsername << endl;
+            }else if (cekAkun->role == "admin"){
+               cout << inputUsername << " bukan sebagai user" << endl;
+            }else if (cekAkun->role == "user"){
+               printPlaylistToLagu(LPL,LP, LPA, inputUsername);
+               cout << endl;
             }
         }else if(pilih == 7){
             updateAkun(LA, userAktif);
@@ -373,7 +375,7 @@ void menuUtama(listLagu &LL, listPlaylist &LP, listAkun &LA, listPlaylistToLagu 
             cin >> username;
             cout << "| Password : ";
             cin >> password;
-            cout << "| Role (User/Admin) : ";
+            cout << "| Role (user/admin) : ";
             cin >> role;
             cout << "-----------------------------" << endl;
 
